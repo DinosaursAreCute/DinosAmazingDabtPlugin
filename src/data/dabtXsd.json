@@ -1,0 +1,1315 @@
+{
+  "generatedAt": "2026-09-22T19:46:00.177Z",
+  "sourceVersion": "0.0.15",
+  "elements": [
+    {
+      "name": "footer",
+      "doc": "One-row key-hint bar drawn on the last terminal row wherever it is declared. items = \"KEY|Label[|WHEN_FN];...\"; KEY may be \"@tui.action.name\" to show the key currently bound to that action.",
+      "children": [],
+      "attributes": [
+        {
+          "name": "items",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "bind",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "scope",
+          "type": "scopeType",
+          "required": false,
+          "enumValues": [
+            "global"
+          ]
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "group",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "pass",
+          "type": "boolType",
+          "required": false,
+          "enumValues": [
+            "true",
+            "false"
+          ]
+        },
+        {
+          "name": "always",
+          "type": "boolType",
+          "required": false,
+          "enumValues": [
+            "true",
+            "false"
+          ]
+        },
+        {
+          "name": "desc",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "tui",
+      "doc": "",
+      "children": [
+        "script",
+        "theme",
+        "include",
+        "pane",
+        "label",
+        "input",
+        "button",
+        "bind",
+        "footer",
+        "checkbox",
+        "password",
+        "textarea",
+        "list",
+        "table",
+        "select",
+        "progress",
+        "tabs"
+      ],
+      "attributes": [
+        {
+          "name": "on_visit",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "defaults",
+          "type": "string",
+          "required": false,
+          "doc": "comma/space separated default keybind groups to switch off for this page, e.g. \"-quit,-scroll\""
+        }
+      ]
+    },
+    {
+      "name": "script",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "src",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "theme",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "src",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "include",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "src",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "pane",
+      "doc": "",
+      "children": [
+        "pane"
+      ],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "split",
+          "type": "splitType",
+          "required": false,
+          "enumValues": [
+            "h",
+            "v",
+            "grid",
+            "fixed"
+          ]
+        },
+        {
+          "name": "weight",
+          "type": "positiveInteger",
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "border",
+          "type": "borderType",
+          "required": false,
+          "enumValues": [
+            "single",
+            "double",
+            "heavy",
+            "none"
+          ]
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "scroll",
+          "type": "scroll",
+          "required": false,
+          "enumValues": [
+            "none",
+            "v",
+            "h",
+            "both"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "min_height",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_height",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "strict_fit",
+          "type": "boolType",
+          "required": false,
+          "enumValues": [
+            "true",
+            "false"
+          ]
+        },
+        {
+          "name": "size_w",
+          "type": "positiveInteger",
+          "required": false,
+          "doc": "split=\"fixed\" only: every child is exactly size_w x size_h cells, flowed left to right and wrapped (tui.fixed)"
+        },
+        {
+          "name": "size_h",
+          "type": "positiveInteger",
+          "required": false
+        },
+        {
+          "name": "span",
+          "type": "positiveInteger",
+          "required": false,
+          "doc": "direct child of a split=\"fixed\" parent only: width in cell units, and force a new row before this child"
+        },
+        {
+          "name": "newline",
+          "type": "boolType",
+          "required": false,
+          "enumValues": [
+            "true",
+            "false"
+          ]
+        },
+        {
+          "name": "rows",
+          "type": "positiveInteger",
+          "required": false,
+          "doc": "split=\"grid\" only"
+        },
+        {
+          "name": "cols",
+          "type": "positiveInteger",
+          "required": false
+        },
+        {
+          "name": "fit",
+          "type": "fitType",
+          "required": false,
+          "enumValues": [
+            "pack",
+            "stretch"
+          ]
+        },
+        {
+          "name": "row_weights",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "col_weights",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "grid_row",
+          "type": "nonNegativeInteger",
+          "required": false,
+          "doc": "direct child of a split=\"grid\" parent only"
+        },
+        {
+          "name": "grid_col",
+          "type": "nonNegativeInteger",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "row",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "row",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "submit",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "label_align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "retain_input_on_submit",
+          "type": "boolType",
+          "required": false,
+          "enumValues": [
+            "true",
+            "false"
+          ]
+        },
+        {
+          "name": "sticky",
+          "type": "boolType",
+          "required": false,
+          "enumValues": [
+            "true",
+            "false"
+          ]
+        },
+        {
+          "name": "label_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "row",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "page",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "row",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "checked",
+          "type": "boolType",
+          "required": false,
+          "enumValues": [
+            "true",
+            "false"
+          ]
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "password",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "row",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "submit",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "label_align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "label_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "on_change",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "row",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "rows",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "submit",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "on_change",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "list",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "row",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "rows",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "items",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "on_change",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "row",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "rows",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "columns",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "data",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "on_change",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "row",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "items",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "on_change",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "row",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "value",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "align",
+          "type": "alignType",
+          "required": false,
+          "enumValues": [
+            "left",
+            "center",
+            "right",
+            "fill"
+          ]
+        },
+        {
+          "name": "valign",
+          "type": "valignType",
+          "required": false,
+          "enumValues": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        {
+          "name": "min_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "max_width",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "hpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "vpad",
+          "type": "nonNegativeInteger",
+          "required": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "on_change",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "doc": "",
+      "children": [
+        "tab"
+      ],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "header_pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "content_pane",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "style",
+          "type": "tabsStyleType",
+          "required": false,
+          "enumValues": [
+            "framed",
+            "compact"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tab",
+      "doc": "",
+      "children": [],
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "default",
+          "type": "boolType",
+          "required": false,
+          "enumValues": [
+            "true",
+            "false"
+          ]
+        }
+      ]
+    }
+  ]
+}

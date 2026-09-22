@@ -1,0 +1,196 @@
+{
+  "name": "dabt-tools",
+  "displayName": "DABT Tools",
+  "description": "Linting, autocomplete, subshell counting, CLI and profiling tools for DinosAmazingBashTui (DABT) apps and plugins.",
+  "version": "0.1.0",
+  "publisher": "dinosaursarecute",
+  "private": true,
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DinosaursAreCute/DinosAmazingDabtPlugin.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Programming Languages",
+    "Debuggers",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:shellscript",
+    "onLanguage:xml",
+    "onLanguage:css",
+    "workspaceContains:**/*_callbacks.sh",
+    "workspaceContains:**/dabt.pkg"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "DABT Tools",
+      "properties": {
+        "dabt.executablePath": {
+          "type": "string",
+          "default": "dabt",
+          "description": "Path to the dabt CLI executable (must be on PATH by default). Also used to auto-detect a live DABT install for API/markup data (see dabt.apiSource.autoDetect)."
+        },
+        "dabt.apiSource.installPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to a DABT checkout/install (containing lib/tui.sh) to read live API and XML-markup data from, overriding auto-detection. Leave blank to auto-detect or fall back to the extension's bundled snapshot."
+        },
+        "dabt.apiSource.autoDetect": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-detect a local DABT install (by resolving dabt.executablePath on PATH, or an open workspace folder that is itself a DABT checkout) and read live API/markup data from it instead of the bundled snapshot."
+        },
+        "dabt.lint.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable DABT-aware linting (private function calls, framework anti-patterns, general bash smells) on shell files."
+        },
+        "dabt.lint.flagPrivateCalls": {
+          "type": "boolean",
+          "default": true,
+          "description": "Flag calls into DABT's private API (_tui.*, _exec_*, _tr_*, leading-underscore) from app/callback code."
+        },
+        "dabt.subshells.showInStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a live subshell/fork count for the active shell script in the status bar."
+        },
+        "dabt.inlayHints.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show inline parameter-name hints at each positional argument of a recognized DABT function call."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "dabt.run",
+        "title": "DABT: Run CLI Command...",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.build",
+        "title": "DABT: Build Package (dabt build)",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.scan",
+        "title": "DABT: Scan Project (dabt scan)",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.app.run",
+        "title": "DABT: Run App",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.runCurrentFile",
+        "title": "DABT: Run Current Script",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.profile.currentFile",
+        "title": "DABT: Profile Current Script",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.debug.trace",
+        "title": "DABT: Debug Trace Current Script (bash -x)",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.subshells.countFile",
+        "title": "DABT: Count Subshells in Current File",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.subshells.report",
+        "title": "DABT: Subshell Report for Workspace",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.showApiDoc",
+        "title": "DABT: Show API Docs for Symbol Under Cursor",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.refreshApiData",
+        "title": "DABT: Refresh API/Markup Data (live-scan or bundled)",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.xml.initPage",
+        "title": "DABT: New Page (XML + callbacks.sh)...",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.xml.insertElement",
+        "title": "DABT: Insert Element...",
+        "category": "DABT"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "dabt.runCurrentFile",
+          "when": "editorLangId == shellscript"
+        },
+        {
+          "command": "dabt.profile.currentFile",
+          "when": "editorLangId == shellscript"
+        },
+        {
+          "command": "dabt.debug.trace",
+          "when": "editorLangId == shellscript"
+        },
+        {
+          "command": "dabt.subshells.countFile",
+          "when": "editorLangId == shellscript"
+        },
+        {
+          "command": "dabt.xml.insertElement",
+          "when": "editorLangId == xml"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "dabt.runCurrentFile",
+          "when": "editorLangId == shellscript",
+          "group": "dabt"
+        },
+        {
+          "command": "dabt.profile.currentFile",
+          "when": "editorLangId == shellscript",
+          "group": "dabt"
+        },
+        {
+          "command": "dabt.debug.trace",
+          "when": "editorLangId == shellscript",
+          "group": "dabt"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "node esbuild.js --production",
+    "gen-data": "node scripts/gen-data.js",
+    "vscode:prepublish": "npm run package",
+    "vsix": "vsce package --no-rewrite-relative-links"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.21.0",
+    "typescript": "^5.4.0"
+  }
+}
