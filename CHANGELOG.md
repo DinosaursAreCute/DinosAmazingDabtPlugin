@@ -2,6 +2,12 @@
 
 All notable changes to the DABT Tools extension are documented in this file.
 
+## [Unreleased]
+
+### Added
+- Abbreviation glossary: hovering an internal (`_`-prefixed) identifier like `_DLG_KIND` or `_TXLK` now explains its abbreviation segments (`src/data/dabtAbbreviations.json`), gated by `dabt.abbreviations.enable`.
+- `scripts/gen-abbrev-candidates.js` / `npm run gen-abbrev-candidates`: scans a DABT checkout for undocumented abbreviation segments to keep the glossary current.
+
 ## [0.1.0] - 2026-09-22
 
 Initial release.

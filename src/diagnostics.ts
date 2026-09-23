@@ -101,7 +101,7 @@ const mouseDrainRule: Rule = {
                 lineNo,
                 m.index,
                 m.index + m[0].length,
-                `TUI_MOUSE_DRAIN_PEEK_TIMEOUT must never be 0 - see the invariant in CLAUDE.md / tui.sh header comment.`,
+                `TUI_MOUSE_DRAIN_PEEK_TIMEOUT must never be 0 / tui.sh header comment.`,
                 vscode.DiagnosticSeverity.Error,
                 'dabt-mouse-drain-zero'
             ),

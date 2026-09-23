@@ -1,0 +1,134 @@
+{
+  "generatedAt": "2026-09-23",
+  "entries": [
+    { "abbr": "DLG", "meaning": "Dialog — modal dialog/prompt/chooser/toast state", "subsystem": "lib/tui_dialog.sh" },
+    { "abbr": "TUI", "meaning": "The TUI framework's own core-engine namespace", "subsystem": "lib/tui.sh" },
+    {
+      "abbr": "P",
+      "meaning": "Pane — per-pane layout state (row/col/width/height/children/scroll, in _TUI_P_* fields). Also reused for \"Program\" in tui_sync.sh's TUI_SYNC_P_ADD/UPDATE/SAME/REMOVE diff-plan arrays.",
+      "subsystem": "lib/tui.sh, lib/tui_api.sh"
+    },
+    {
+      "abbr": "W",
+      "meaning": "Widget — per-widget state (type/pane/value/label/action, in _TUI_W_* fields)",
+      "subsystem": "lib/tui_api.sh, lib/tui_widgets.sh"
+    },
+    { "abbr": "WSR", "meaning": "Widget Screen Row — resolved draw position from _tui._widget_pos", "subsystem": "lib/tui.sh" },
+    { "abbr": "WSC", "meaning": "Widget Screen Col — resolved draw position from _tui._widget_pos", "subsystem": "lib/tui.sh" },
+    { "abbr": "WSW", "meaning": "Widget Screen Width — resolved draw size from _tui._widget_pos", "subsystem": "lib/tui.sh" },
+    { "abbr": "WSH", "meaning": "Widget Screen Height — resolved draw size from _tui._widget_pos", "subsystem": "lib/tui.sh" },
+    { "abbr": "TX", "meaning": "Text — prefix for the text-editing engine's per-widget state (input/password/textarea)", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXC", "meaning": "cursor position", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXA", "meaning": "selection anchor (-1 = no selection)", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXS", "meaning": "horizontal scroll offset", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXW", "meaning": "wanted column — remembered column for up/down nav across shorter lines", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXH", "meaning": "rows shown — visible height of a textarea", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXF", "meaning": "keep-cursor-in-view-on-next-draw flag (0 after a wheel scroll)", "subsystem": "lib/tui_text.sh" },
+    {
+      "abbr": "TXLK",
+      "meaning": "last edit kind (type/move/undo) — coalesces consecutive keystrokes into one undo step",
+      "subsystem": "lib/tui_text.sh"
+    },
+    {
+      "abbr": "TXLP",
+      "meaning": "last edit cursor position — compared to detect a break in typing",
+      "subsystem": "lib/tui_text.sh"
+    },
+    { "abbr": "TXLS", "meaning": "line-start byte offsets, cached by _tui_text.index", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXUV", "meaning": "undo stack: value", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXUC", "meaning": "undo stack: cursor position", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXUN", "meaning": "undo stack: entry count", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXRV", "meaning": "redo stack: value", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXRC", "meaning": "redo stack: cursor position", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "TXRN", "meaning": "redo stack: entry count", "subsystem": "lib/tui_text.sh" },
+    {
+      "abbr": "TXG",
+      "meaning": "field geometry of the widget's last draw (origin row/col, width, rows) — used for mouse-click-to-cursor mapping",
+      "subsystem": "lib/tui_text.sh"
+    },
+    { "abbr": "PV", "meaning": "paint value — one rendered/painted line of a text widget", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "SA", "meaning": "selection start offset", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "SB", "meaning": "selection end offset", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "LC", "meaning": "line count", "subsystem": "lib/tui_text.sh" },
+    { "abbr": "WX", "meaning": "prefix for select/list/table-style widget extension state", "subsystem": "lib/tui_widgets.sh" },
+    { "abbr": "WXSEL", "meaning": "selected index", "subsystem": "lib/tui_widgets.sh" },
+    { "abbr": "WXTOP", "meaning": "scroll top row", "subsystem": "lib/tui_widgets.sh" },
+    { "abbr": "WXCOLS", "meaning": "table column headers", "subsystem": "lib/tui_widgets.sh" },
+    { "abbr": "WXH", "meaning": "rows/height", "subsystem": "lib/tui_widgets.sh" },
+    { "abbr": "WXF", "meaning": "needs-redraw-in-view flag (mirrors TXF)", "subsystem": "lib/tui_widgets.sh" },
+    { "abbr": "WXA", "meaning": "per-widget items array, via nameref _WXI_<id>", "subsystem": "lib/tui_widgets.sh" },
+    {
+      "abbr": "TA",
+      "meaning": "internal state for lib/tui_api.sh (the public callback/app helper API) — e.g. scheduled tui.every/tui.after jobs, tui.watch background jobs",
+      "subsystem": "lib/tui_api.sh"
+    },
+    { "abbr": "WPANE", "meaning": "target pane for a tui.watch background job", "subsystem": "lib/tui_api.sh" },
+    { "abbr": "WSEC", "meaning": "tui.watch refresh interval, in seconds", "subsystem": "lib/tui_api.sh" },
+    { "abbr": "WCMD", "meaning": "tui.watch shell command being run in the background", "subsystem": "lib/tui_api.sh" },
+    { "abbr": "WBUF", "meaning": "tui.watch output buffer", "subsystem": "lib/tui_api.sh" },
+    { "abbr": "WPID", "meaning": "tui.watch background process PID", "subsystem": "lib/tui_api.sh" },
+    { "abbr": "WIDS", "meaning": "list of active tui.watch job ids", "subsystem": "lib/tui_api.sh" },
+    { "abbr": "PAL", "meaning": "command Palette UI state (the pop-up command bar)", "subsystem": "lib/tui_cmd.sh" },
+    { "abbr": "TPL", "meaning": "plugin registry state (loaded <script> plugins)", "subsystem": "lib/tui_plugin.sh" },
+    {
+      "abbr": "TP",
+      "meaning": "Theme Parse — staging arrays for one freshly-parsed theme/CSS file, before _tui.theme_commit merges it into the committed _TUI_CLASS_* tables",
+      "subsystem": "lib/tui_style.sh"
+    },
+    {
+      "abbr": "RUI",
+      "meaning": "Resolve UI — the interactive conflict-resolution dialog loop for tui.sync.resolve_ui",
+      "subsystem": "lib/tui_update.sh"
+    },
+    { "abbr": "DAPK", "meaning": "the dapk package-manager subsystem's own short name (dabt pkg / dapk.* functions)", "subsystem": "lib/dapk" },
+    { "abbr": "PM", "meaning": "Package Manager — pacman/apt/dnf/zypper/apk/brew install command lines", "subsystem": "lib/dapk/deps.sh" },
+    { "abbr": "VCMP", "meaning": "Version CoMPare result (-1|0|1, semver precedence)", "subsystem": "lib/dapk/version.sh" },
+    {
+      "abbr": "BI",
+      "meaning": "Build Item — one `include file|dir` entry being accumulated for dabt build's manifest",
+      "subsystem": "lib/dapk/cmd/build.sh"
+    },
+    {
+      "abbr": "PC",
+      "meaning": "Pane Current — the pane keyboard actions start from (focused pane → focused widget's pane → hovered pane)",
+      "subsystem": "lib/tui_input.sh"
+    },
+    { "abbr": "NAVP", "meaning": "NAV Panes — visible leaf panes worth keyboard-focusing (Tab/arrow navigation)", "subsystem": "lib/tui_input.sh" },
+    {
+      "abbr": "REVK",
+      "meaning": "REVerse Keys — command → key-hint lookup, the inverse of the normal key→command bind table",
+      "subsystem": "lib/tui_input.sh"
+    },
+    { "abbr": "BL", "meaning": "Bind List — flattened rows of all active keybindings", "subsystem": "lib/tui_input.sh" },
+    { "abbr": "HIT", "meaning": "mouse hit-test result — which pane the pointer is currently over", "subsystem": "lib/tui.sh" },
+    {
+      "abbr": "TRV",
+      "meaning": "TR Value — fork-free scratch return value for terminal_renderer.sh's `_v`-suffixed helpers (avoids a subshell per call)",
+      "subsystem": "lib/terminal_renderer.sh"
+    },
+    { "abbr": "TR", "meaning": "Terminal Renderer", "subsystem": "lib/terminal_renderer.sh" },
+    {
+      "abbr": "SGR",
+      "meaning": "Select Graphic Rendition — the standard ANSI escape-code family for color/bold/underline/etc (not DABT-specific)",
+      "subsystem": "lib/tui_style.sh"
+    },
+    {
+      "abbr": "SG",
+      "meaning": "scratch var holding one resolved SGR string before it's copied into a field",
+      "subsystem": "lib/tui_dialog.sh"
+    },
+    {
+      "abbr": "EXEC",
+      "meaning": "Background Execution — tui.exec's tracked background-process instances (iid -> command/PID/pane/status/…)",
+      "subsystem": "lib/tui.sh"
+    },
+    { "abbr": "TST", "meaning": "Toast — the parallel arrays behind tui.notify's toast notifications", "subsystem": "lib/tui_dialog.sh" },
+    { "abbr": "PUB", "meaning": "Publish — dapk.publish's GitHub-release state (repo/tag/name/body/assets/…)", "subsystem": "lib/dapk/publish.sh" },
+    { "abbr": "DC", "meaning": "DAPK Collect — staging state while gathering files for a package", "subsystem": "lib/dapk/collect.sh" },
+    {
+      "abbr": "UBIND",
+      "meaning": "User Bind — user-defined keybindings (as opposed to code/default binds), serialized to/from config",
+      "subsystem": "lib/tui_input.sh"
+    }
+  ]
+}

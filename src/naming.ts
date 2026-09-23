@@ -1,4 +1,4 @@
-// Recognized private-name shapes, per the invariant in DABT's CLAUDE.md:
+// Recognized private-name shapes, per the invariant in DABT's 
 // "_tui.*/_exec_*/_tr_*/leading-underscore fns are private - never call
 // from config/callback code". Shared by the live parser, the bundled-data
 // generator and the runtime lint/completion providers so there's exactly

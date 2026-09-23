@@ -66,6 +66,11 @@
           "type": "boolean",
           "default": true,
           "description": "Show inline parameter-name hints at each positional argument of a recognized DABT function call."
+        },
+        "dabt.abbreviations.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Hover an internal (_-prefixed) identifier like _DLG_KIND to see what its abbreviation segments (DLG, KIND, ...) stand for, from the bundled glossary at src/data/dabtAbbreviations.json."
         }
       }
     },
@@ -183,6 +188,7 @@
     "watch": "node esbuild.js --watch",
     "package": "node esbuild.js --production",
     "gen-data": "node scripts/gen-data.js",
+    "gen-abbrev-candidates": "node scripts/gen-abbrev-candidates.js",
     "vscode:prepublish": "npm run package",
     "vsix": "vsce package --no-rewrite-relative-links"
   },

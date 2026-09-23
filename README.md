@@ -39,6 +39,7 @@ function - a built-in's doc, or a local callback's definition.
 |---|---|
 | **Lint** | Private-internal calls (`_tui.*`/`_exec_*`/`_tr_*`) from app code, `_TUI_TICK_FN` clobbering, `TUI_MOUSE_DRAIN_PEEK_TIMEOUT=0`, and general bash smells (useless `cat`, backticks, `echo -e`, `pipe \| while read` subshell trap) |
 | **Autocomplete & hover** | Every `tui.*`/`_tui.*` function, with signature and doc text |
+| **Abbreviation glossary** | Hover an internal identifier like `_DLG_KIND` or `_TXLK` to see what its abbreviation segments stand for (a curated glossary in `src/data/dabtAbbreviations.json`; `npm run gen-abbrev-candidates` finds new ones to define) |
 | **Inlay hints & signature help** | Positional args get their parameter name shown inline (`tui.paint ID:mypane TEXT:"hi"`) - bash gives no such feedback natively |
 | **XML markup tooling** | Tag/attribute/value completion from `tui.xsd`, hover docs, go-to-definition from `action=`/`on_visit=`/`src=` to the real function/file |
 | **`DABT: New Page...` / `Insert Element...`** | Scaffold a page + callback stub together; insert any element as a snippet, Tab through every attribute in order |
