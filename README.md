@@ -1,6 +1,5 @@
 <div align="center">
 
-<img src="assets/icon.png" alt="" width="96"><br/>
 <img src="assets/logo.png" alt="DABT Tools" width="490">
 
 **VS Code tooling for developing [DABT](https://github.com/DinosaursAreCute/DinosAmazingBashTui) (DinosAmazingBashTui) applications and plugins.**<br/>
