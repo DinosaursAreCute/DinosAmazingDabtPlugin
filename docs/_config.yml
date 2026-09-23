@@ -1,0 +1,44 @@
+title: DABT Tools - VS Code extension for D.A.B.T
+description: VS Code tooling for DinosAmazingBashTui apps and plugins. Lint, autocomplete, inlay hints, XML markup tooling, theme-aware colors, fork counting, CLI and profiling.
+url: https://dinosaursarecute.github.io
+baseurl: /DinosAmazingDabtPlugin
+theme: jekyll-theme-primer
+logo: /assets/img/logo.png
+lang: en
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-titles-from-headings
+relative_links:
+  enabled: true
+  collections: false
+optional_front_matter:
+  remove_originals: true
+readme_index:
+  remove_originals: true
+titles_from_headings:
+  enabled: true
+  strip_title: true
+  collections: true
+github:
+  repository_url: https://github.com/DinosaursAreCute/DinosAmazingDabtPlugin
+# Used for cross-links into the framework's own docs site.
+dabt_docs: https://dinosaursarecute.github.io/DinosAmazingBashTui
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .bundle/
+  - node_modules/
+defaults:
+  - scope:
+      path: ""
+    values:
+      # GitHub's *native* Jekyll build applies this implicitly for a themed
+      # site; a plain `jekyll build` (our custom Actions build) does not, so
+      # it must be explicit or every page renders with no layout at all.
+      layout: default
+      description: DABT Tools documentation - install, features, lint rules, commands, settings and development guide for the VS Code extension.

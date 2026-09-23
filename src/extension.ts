@@ -81,12 +81,18 @@ export function activate(context: vscode.ExtensionContext) {
 
         vscode.commands.registerCommand('dabt.run', promptAndRunDabtCommand),
         vscode.commands.registerCommand('dabt.build', () => runDabtCommand('build')),
-        vscode.commands.registerCommand('dabt.scan', () => runDabtCommand('scan')),
+        // `dabt scan` needs a PATH; the DABT terminal starts in the workspace folder.
+        vscode.commands.registerCommand('dabt.scan', () => runDabtCommand('scan .')),
         vscode.commands.registerCommand('dabt.app.run', async () => {
-            const name = await vscode.window.showInputBox({ prompt: 'App name (blank = list apps)' });
-            if (name === undefined) return;
-            runDabtCommand(name ? `app run ${name}` : 'app list');
+            const target = await vscode.window.showInputBox({
+                prompt: 'Installed app name, or a path to an entry script / app folder (blank = list apps)',
+                placeHolder: 'e.g. my_app, ., bin/run.sh',
+            });
+            if (target === undefined) return;
+            runDabtCommand(target ? `app run ${target}` : 'app list');
         }),
+        vscode.commands.registerCommand('dabt.doctor', () => runDabtCommand('doctor')),
+        vscode.commands.registerCommand('dabt.clearCache', () => runDabtCommand('clear-cache')),
 
         vscode.commands.registerCommand('dabt.runCurrentFile', runCurrentFile),
         vscode.commands.registerCommand('dabt.profile.currentFile', profileCurrentFile),

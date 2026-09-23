@@ -2,3 +2,9 @@ node_modules/
 dist/
 *.vsix
 .vscode-test/
+docs/_site/
+docs/.jekyll-cache/
+docs/Gemfile.lock
+docs/vendor/
+docs/.bundle/
+docs/_data/version.yml

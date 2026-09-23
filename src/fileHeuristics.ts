@@ -1,3 +1,5 @@
+import * as fs from 'fs';
+import * as path from 'path';
 import * as vscode from 'vscode';
 
 // Whether a document is worth running DABT-aware features on. Deliberately
@@ -13,10 +15,14 @@ export function isCallbackFile(document: vscode.TextDocument): boolean {
     return /_callbacks\.sh$/.test(document.fileName) || /\.plugin\.sh$/.test(document.fileName);
 }
 
-// True for files that are part of DABT's own framework source (lib/tui*.sh,
-// lib/dapk/*.sh) where calling private (_tui.*, _exec_*, _tr_*, _prefixed)
-// helpers is normal, expected code - not a lint violation.
+// True for files that are part of DABT's own framework source - any .sh under
+// a lib/ directory that holds tui.sh (lib/tui.sh, lib/state.sh, lib/markup/,
+// lib/input/, lib/dapk/, ...) - where calling private (_tui.*, _exec_*,
+// _tr_*, _prefixed) helpers is normal, expected code - not a lint violation.
 export function isDabtFrameworkSource(document: vscode.TextDocument): boolean {
     const p = document.fileName.replace(/\\/g, '/');
-    return /\/lib\/(tui[_.].*\.sh|dapk\/.*\.sh|tui\.sh)$/.test(p) || /\/lib\/tui\.sh$/.test(p);
+    if (!p.endsWith('.sh')) return false;
+    const libIdx = p.lastIndexOf('/lib/');
+    if (libIdx === -1) return false;
+    return fs.existsSync(path.join(p.slice(0, libIdx), 'lib', 'tui.sh'));
 }

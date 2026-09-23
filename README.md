@@ -11,8 +11,9 @@ No dabt install required to work; live-scans one when it finds it.
 [![TypeScript](https://img.shields.io/badge/typescript-strict-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](tsconfig.json)
 [![Dependencies](https://img.shields.io/badge/runtime%20deps-none-blue?style=for-the-badge)](package.json)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge)](LICENSE)
+[![Docs](https://img.shields.io/badge/docs-github.io-ff8cbf?style=for-the-badge)](https://dinosaursarecute.github.io/DinosAmazingDabtPlugin/)
 
-[**Features**](#features) · [**Installing**](#installing) · [**Data source**](#data-source) · [**Building**](#building) · [**Development**](#development)
+[**Documentation**](https://dinosaursarecute.github.io/DinosAmazingDabtPlugin/) · [**Features**](#features) · [**Installing**](#installing) · [**Data source**](#data-source) · [**Building**](#building) · [**Development**](#development)
 
 </div>
 
@@ -37,7 +38,7 @@ function - a built-in's doc, or a local callback's definition.
 
 | | |
 |---|---|
-| **Lint** | Private-internal calls (`_tui.*`/`_exec_*`/`_tr_*`) from app code, `_TUI_TICK_FN` clobbering, `TUI_MOUSE_DRAIN_PEEK_TIMEOUT=0`, and general bash smells (useless `cat`, backticks, `echo -e`, `pipe \| while read` subshell trap) |
+| **Lint** | [7 rules](https://dinosaursarecute.github.io/DinosAmazingDabtPlugin/reference/lint-rules): private-internal calls (`_tui.*`/`_exec_*`/`_tr_*`) from app code, `_TUI_TICK_FN` clobbering, `TUI_MOUSE_DRAIN_PEEK_TIMEOUT=0`, and general bash smells (useless `cat`, backticks, `echo -e`, `pipe \| while read` subshell trap) |
 | **Autocomplete & hover** | Every `tui.*`/`_tui.*` function, with signature and doc text |
 | **Abbreviation glossary** | Hover an internal identifier like `_DLG_KIND` or `_TXLK` to see what its abbreviation segments stand for (a curated glossary in `src/data/dabtAbbreviations.json`; `npm run gen-abbrev-candidates` finds new ones to define) |
 | **Inlay hints & signature help** | Positional args get their parameter name shown inline (`tui.paint ID:mypane TEXT:"hi"`) - bash gives no such feedback natively |
@@ -46,8 +47,10 @@ function - a built-in's doc, or a local callback's definition.
 | **Required-attribute markers** | A red `*` badge on every required attribute actually written, no hover needed |
 | **Theme-aware `class=`** | Completion from the page's own `theme.css`, real clickable color swatches (`fg`+`bg`), inlay hints for which is which |
 | **Subshell/fork counter** | Status bar + workspace report: command substitutions, process substitutions, subshells, pipeline stages, background jobs per file |
-| **CLI integration** | `DABT: Run CLI Command...`, `dabt build`/`scan`/`app run` straight through the integrated terminal |
+| **CLI integration** | `dabt build`, `scan .`, `app run NAME\|PATH`, `doctor`, `clear-cache`, or any `DABT: Run CLI Command...`, straight through the integrated terminal |
 | **Debugging & profiling** | `bash -x` trace with `file:line` `PS4`; real fork-count + wall-time profiling via `/proc/loadavg` |
+
+Every command, setting and lint rule is documented on the **[docs site](https://dinosaursarecute.github.io/DinosAmazingDabtPlugin/)**.
 
 <h2 id="installing"><img src="assets/headers/installing.png" alt="Installing" height="35"></h2>
 
@@ -55,7 +58,7 @@ Package a `.vsix` and install it like any other extension:
 
 ```bash
 npm install
-./scripts/package.sh                            # -> dabt-tools-0.1.0.vsix
+./scripts/package.sh                            # -> dabt-tools-<version>.vsix
 code --install-extension dabt-tools-0.1.0.vsix
 ```
 
@@ -66,7 +69,7 @@ connected to that remote, same as any other extension.
 
 <h2 id="data-source"><img src="assets/headers/data-source.png" alt="Data source" height="35"></h2>
 
-API/markup data comes from one of three places, in priority order, so it
+API/markup data comes from one of four places, in priority order, so it
 never depends on a snapshot going stale **and** never requires an install
 either - both are always usable:
 
@@ -120,6 +123,9 @@ Small, single-purpose scripts, same idea as DABT's own `tools/`:
 | `scripts/watch.sh` | Rebuild on every save - pair with `F5` |
 | `scripts/package.sh` | Minified build + `.vsix`, ready to install |
 | `scripts/gen-data.sh /path/to/DinosAmazingBashTui` | Refresh the bundled fallback snapshot from a real checkout |
+| `npm run gen-abbrev-candidates -- /path/to/DinosAmazingBashTui` | List abbreviation segments not yet in the glossary |
+
+The docs site lives in [`docs/`](docs/) (Jekyll, same theme as the DABT docs) and deploys from `.github/workflows/pages.yml`; see [Building & packaging](https://dinosaursarecute.github.io/DinosAmazingDabtPlugin/development/building#this-documentation-site).
 
 <h2 id="development"><img src="assets/headers/development.png" alt="Development" height="35"></h2>
 

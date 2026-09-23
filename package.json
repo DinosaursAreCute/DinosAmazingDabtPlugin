@@ -1,7 +1,7 @@
 {
   "name": "dabt-tools",
   "displayName": "DABT Tools",
-  "description": "Linting, autocomplete, subshell counting, CLI and profiling tools for DinosAmazingBashTui (DABT) apps and plugins.",
+  "description": "Linting, autocomplete, inlay hints, XML markup tooling, theme-aware colors, subshell counting, CLI and profiling for DinosAmazingBashTui (DABT) apps and plugins.",
   "version": "0.1.0",
   "publisher": "dinosaursarecute",
   "private": true,
@@ -10,6 +10,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/DinosaursAreCute/DinosAmazingDabtPlugin.git"
+  },
+  "homepage": "https://dinosaursarecute.github.io/DinosAmazingDabtPlugin/",
+  "bugs": {
+    "url": "https://github.com/DinosaursAreCute/DinosAmazingDabtPlugin/issues"
   },
   "engines": {
     "vscode": "^1.85.0"
@@ -25,7 +29,8 @@
     "onLanguage:xml",
     "onLanguage:css",
     "workspaceContains:**/*_callbacks.sh",
-    "workspaceContains:**/dabt.pkg"
+    "workspaceContains:**/dabt.pkg",
+    "workspaceContains:**/.dabt.metadata"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -77,67 +82,77 @@
     "commands": [
       {
         "command": "dabt.run",
-        "title": "DABT: Run CLI Command...",
+        "title": "Run CLI Command...",
         "category": "DABT"
       },
       {
         "command": "dabt.build",
-        "title": "DABT: Build Package (dabt build)",
+        "title": "Build Package (dabt build)",
         "category": "DABT"
       },
       {
         "command": "dabt.scan",
-        "title": "DABT: Scan Project (dabt scan)",
+        "title": "Scan Project (dabt scan .)",
         "category": "DABT"
       },
       {
         "command": "dabt.app.run",
-        "title": "DABT: Run App",
+        "title": "Run App",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.doctor",
+        "title": "Show Install Details (dabt doctor)",
+        "category": "DABT"
+      },
+      {
+        "command": "dabt.clearCache",
+        "title": "Clear Page Cache (dabt clear-cache)",
         "category": "DABT"
       },
       {
         "command": "dabt.runCurrentFile",
-        "title": "DABT: Run Current Script",
+        "title": "Run Current Script",
         "category": "DABT"
       },
       {
         "command": "dabt.profile.currentFile",
-        "title": "DABT: Profile Current Script",
+        "title": "Profile Current Script",
         "category": "DABT"
       },
       {
         "command": "dabt.debug.trace",
-        "title": "DABT: Debug Trace Current Script (bash -x)",
+        "title": "Debug Trace Current Script (bash -x)",
         "category": "DABT"
       },
       {
         "command": "dabt.subshells.countFile",
-        "title": "DABT: Count Subshells in Current File",
+        "title": "Count Subshells in Current File",
         "category": "DABT"
       },
       {
         "command": "dabt.subshells.report",
-        "title": "DABT: Subshell Report for Workspace",
+        "title": "Subshell Report for Workspace",
         "category": "DABT"
       },
       {
         "command": "dabt.showApiDoc",
-        "title": "DABT: Show API Docs for Symbol Under Cursor",
+        "title": "Show API Docs for Symbol Under Cursor",
         "category": "DABT"
       },
       {
         "command": "dabt.refreshApiData",
-        "title": "DABT: Refresh API/Markup Data (live-scan or bundled)",
+        "title": "Refresh API/Markup Data (live-scan or bundled)",
         "category": "DABT"
       },
       {
         "command": "dabt.xml.initPage",
-        "title": "DABT: New Page (XML + callbacks.sh)...",
+        "title": "New Page (XML + callbacks.sh)...",
         "category": "DABT"
       },
       {
         "command": "dabt.xml.insertElement",
-        "title": "DABT: Insert Element...",
+        "title": "Insert Element...",
         "category": "DABT"
       }
     ],

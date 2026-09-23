@@ -1,0 +1,18 @@
+<div class="term ed" role="img" aria-label="Illustration: a DABT page and its callbacks in VS Code with DABT Tools - required-attribute markers, a theme color swatch with fg/bg hints, parameter-name inlay hints, a private-API warning and the fork counter in the status bar">
+  <div class="term-bar"><i></i><i></i><i></i><span>home.xml · home_callbacks.sh — DABT Tools</span></div>
+  <div class="ed-tabs"><b>home.xml</b><span>home_callbacks.sh</span><span>theme.css</span></div>
+<pre class="ed-code" aria-hidden="true"><span class="ln">1</span><span class="tk">&lt;tui</span> <span class="at">on_visit</span>=<span class="st">"home_visit"</span><span class="tk">&gt;</span>
+<span class="ln">2</span>  <span class="tk">&lt;script</span> <span class="at">src</span><span class="req">*</span>=<span class="st">"home_callbacks.sh"</span><span class="tk">/&gt;</span>
+<span class="ln">3</span>  <span class="tk">&lt;theme</span> <span class="at">src</span><span class="req">*</span>=<span class="st">"theme.css"</span><span class="tk">/&gt;</span>
+<span class="ln">4</span>  <span class="tk">&lt;pane</span> <span class="at">id</span><span class="req">*</span>=<span class="st">"main"</span> <span class="at">split</span>=<span class="st">"v"</span> <span class="at">title</span>=<span class="st">"Home"</span> <span class="at">border</span>=<span class="st">"single"</span><span class="tk">/&gt;</span>
+<span class="ln">5</span>  <span class="tk">&lt;button</span> <span class="at">id</span><span class="req">*</span>=<span class="st">"save"</span> <span class="at">pane</span><span class="req">*</span>=<span class="st">"main"</span> <span class="at">row</span><span class="req">*</span>=<span class="st">"1"</span> <span class="at">class</span>=<span class="st">"<i class="sw" style="background:#1e1e2e"></i><i class="sw" style="background:#34e2e2"></i>accent"</span><span class="hint">fg:br_cyan bg:#1e1e2e</span> <span class="at">action</span>=<span class="st fn">"home_save"</span><span class="tk">/&gt;</span>
+<span class="ln">6</span><span class="tk">&lt;/tui&gt;</span>
+<span class="sep">── home_callbacks.sh ─────────────────────────</span>
+<span class="ln">1</span><span class="fnd">home_save</span>() {
+<span class="ln">2</span>    <span class="fn">tui.paint</span> <span class="hint">ID:</span>status <span class="hint">TEXT:</span><span class="st">"saved"</span>
+<span class="ln">3</span>    <span class="squig">_tui._layout</span>
+<span class="ln">4</span>    <span class="va">lines</span>=<span class="fk">$(</span>wc -l &lt; <span class="st">"$f"</span><span class="fk">)</span>
+<span class="ln">5</span>}</pre>
+  <div class="ed-problem"><b>⚠</b> '_tui._layout' is a private DABT internal - callback/app code should use the public tui.* API.<em>dabt(dabt-private-call)</em></div>
+  <div class="ed-status"><span>⌘ DABT</span><span class="grow"></span><span>&gt;_ 1 fork</span><span>⟳ dabt: live</span></div>
+</div>

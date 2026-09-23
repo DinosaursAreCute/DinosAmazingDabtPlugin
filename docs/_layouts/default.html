@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>try{var t=localStorage.getItem('dabt-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}document.documentElement.dataset.baseurl="{{ site.baseurl }}";</script>
+  {% seo %}
+  <link rel="icon" href="{{ '/assets/img/logo.png' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/dabt.css' | relative_url }}?v={{ site.github.build_revision | default: site.time | date: '%s' }}">
+  {% include head-custom.html %}
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="{{ '/' | relative_url }}"><img src="{{ '/assets/img/logo.png' | relative_url }}" alt=""><span>DABT Tools</span><em>v{{ site.data.version.number | default: 'dev' }}</em></a>
+  <button class="search-trigger" id="search-trigger" aria-label="Search (press / )">
+    <span>Search</span><kbd>/</kbd>
+  </button>
+  <span class="grow"></span>
+  <a class="toplink" href="{{ '/guide/install' | relative_url }}">Install</a>
+  <a class="toplink" href="{{ '/reference/commands' | relative_url }}">Reference</a>
+  <a class="toplink" href="{{ site.dabt_docs }}/">D.A.B.T docs ↗</a>
+  <a class="toplink" href="{{ site.github.repository_url }}">GitHub ↗</a>
+  <button class="icon-btn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="search-overlay" id="search-overlay" hidden>
+  <div class="search-modal">
+    <div class="search-modal-head">
+      <div class="search-scope" id="search-scope" role="tablist" aria-label="Search scope">
+        <button type="button" role="tab" data-scope="section" aria-selected="true">This section</button>
+        <button type="button" role="tab" data-scope="all" aria-selected="false">Everywhere</button>
+      </div>
+      <button class="icon-btn" id="search-close" aria-label="Close search (Esc)">✕</button>
+    </div>
+    <div id="search"></div>
+  </div>
+</div>
+<div class="shell">
+  <aside class="side">{% include nav.html %}</aside>
+  <main class="main" data-pagefind-body>
+    {% if page.url == '/' %}
+    <section class="hero">
+      <div class="hero-text">
+        {% include logo-blocks.html %}
+        <p class="eyebrow">VS Code extension · for D.A.B.T</p>
+        <h1>Your editor, fluent in<br><span class="grad">DABT.</span></h1>
+        <p class="lead">Lint, autocomplete, inlay hints and XML markup tooling for bash TUI apps built on D.A.B.T. It reads DABT's own source, so it never goes stale.</p>
+        <div class="cta">
+          <a class="btn primary" href="{{ '/guide/install' | relative_url }}">Install the extension →</a>
+          <a class="btn" href="{{ '/reference/commands' | relative_url }}">Commands &amp; settings</a>
+          <a class="btn" href="{{ site.github.repository_url }}"><svg class="ic" viewBox="0 0 7 7" aria-hidden="true" shape-rendering="crispEdges"><rect x="3" y="0" width="1" height="1" fill="currentColor"/><rect x="3" y="1" width="1" height="1" fill="currentColor"/><rect x="2" y="2" width="1" height="1" fill="currentColor"/><rect x="3" y="2" width="1" height="1" fill="currentColor"/><rect x="4" y="2" width="1" height="1" fill="currentColor"/><rect x="0" y="3" width="1" height="1" fill="currentColor"/><rect x="1" y="3" width="1" height="1" fill="currentColor"/><rect x="2" y="3" width="1" height="1" fill="currentColor"/><rect x="3" y="3" width="1" height="1" fill="currentColor"/><rect x="4" y="3" width="1" height="1" fill="currentColor"/><rect x="5" y="3" width="1" height="1" fill="currentColor"/><rect x="6" y="3" width="1" height="1" fill="currentColor"/><rect x="1" y="4" width="1" height="1" fill="currentColor"/><rect x="2" y="4" width="1" height="1" fill="currentColor"/><rect x="3" y="4" width="1" height="1" fill="currentColor"/><rect x="4" y="4" width="1" height="1" fill="currentColor"/><rect x="5" y="4" width="1" height="1" fill="currentColor"/><rect x="2" y="5" width="1" height="1" fill="currentColor"/><rect x="3" y="5" width="1" height="1" fill="currentColor"/><rect x="4" y="5" width="1" height="1" fill="currentColor"/><rect x="1" y="6" width="1" height="1" fill="currentColor"/><rect x="2" y="6" width="1" height="1" fill="currentColor"/><rect x="4" y="6" width="1" height="1" fill="currentColor"/><rect x="5" y="6" width="1" height="1" fill="currentColor"/></svg> GitHub</a>
+        </div>
+        <pre class="install"><code>code --install-extension dabt-tools-{{ site.data.version.number | default: '0.1.0' }}.vsix</code></pre>
+      </div>
+      <div class="hero-shot">
+        {% include editor-demo.html %}
+      </div>
+    </section>
+    <section class="features">
+      <div><b><svg class="ic" viewBox="0 0 7 7" aria-hidden="true" shape-rendering="crispEdges"><rect x="3" y="0" width="1" height="1" fill="var(--c4)"/><rect x="2" y="1" width="1" height="1" fill="var(--c4)"/><rect x="4" y="1" width="1" height="1" fill="var(--c4)"/><rect x="2" y="2" width="1" height="1" fill="var(--c4)"/><rect x="4" y="2" width="1" height="1" fill="var(--c4)"/><rect x="1" y="3" width="1" height="1" fill="var(--c4)"/><rect x="3" y="3" width="1" height="1" fill="var(--c4)"/><rect x="5" y="3" width="1" height="1" fill="var(--c4)"/><rect x="1" y="4" width="1" height="1" fill="var(--c4)"/><rect x="5" y="4" width="1" height="1" fill="var(--c4)"/><rect x="0" y="5" width="1" height="1" fill="var(--c4)"/><rect x="3" y="5" width="1" height="1" fill="var(--c4)"/><rect x="6" y="5" width="1" height="1" fill="var(--c4)"/><rect x="0" y="6" width="1" height="1" fill="var(--c4)"/><rect x="1" y="6" width="1" height="1" fill="var(--c4)"/><rect x="2" y="6" width="1" height="1" fill="var(--c4)"/><rect x="3" y="6" width="1" height="1" fill="var(--c4)"/><rect x="4" y="6" width="1" height="1" fill="var(--c4)"/><rect x="5" y="6" width="1" height="1" fill="var(--c4)"/><rect x="6" y="6" width="1" height="1" fill="var(--c4)"/></svg> Lint</b><span>Private-API calls, tick clobbering, bash pitfalls.</span></div>
+      <div><b><svg class="ic" viewBox="0 0 11 5" aria-hidden="true" shape-rendering="crispEdges"><rect x="2" y="0" width="1" height="1" fill="var(--acc2)"/><rect x="5" y="0" width="1" height="1" fill="var(--acc2)"/><rect x="9" y="0" width="1" height="1" fill="var(--acc2)"/><rect x="1" y="1" width="1" height="1" fill="var(--acc2)"/><rect x="5" y="1" width="1" height="1" fill="var(--acc2)"/><rect x="10" y="1" width="1" height="1" fill="var(--acc2)"/><rect x="0" y="2" width="1" height="1" fill="var(--acc2)"/><rect x="4" y="2" width="1" height="1" fill="var(--acc2)"/><rect x="1" y="3" width="1" height="1" fill="var(--acc2)"/><rect x="4" y="3" width="1" height="1" fill="var(--acc2)"/><rect x="10" y="3" width="1" height="1" fill="var(--acc2)"/><rect x="2" y="4" width="1" height="1" fill="var(--acc2)"/><rect x="4" y="4" width="1" height="1" fill="var(--acc2)"/><rect x="9" y="4" width="1" height="1" fill="var(--acc2)"/></svg> Inlay hints</b><span>Parameter names on every <code>tui.*</code> argument.</span></div>
+      <div><b><svg class="ic" viewBox="0 0 10 5" aria-hidden="true" shape-rendering="crispEdges"><rect x="2" y="0" width="1" height="1" fill="var(--acc)"/><rect x="5" y="0" width="1" height="1" fill="var(--acc)"/><rect x="7" y="0" width="1" height="1" fill="var(--acc)"/><rect x="1" y="1" width="1" height="1" fill="var(--acc)"/><rect x="5" y="1" width="1" height="1" fill="var(--acc)"/><rect x="8" y="1" width="1" height="1" fill="var(--acc)"/><rect x="0" y="2" width="1" height="1" fill="var(--acc)"/><rect x="4" y="2" width="1" height="1" fill="var(--acc)"/><rect x="9" y="2" width="1" height="1" fill="var(--acc)"/><rect x="1" y="3" width="1" height="1" fill="var(--acc)"/><rect x="4" y="3" width="1" height="1" fill="var(--acc)"/><rect x="8" y="3" width="1" height="1" fill="var(--acc)"/><rect x="2" y="4" width="1" height="1" fill="var(--acc)"/><rect x="4" y="4" width="1" height="1" fill="var(--acc)"/><rect x="7" y="4" width="1" height="1" fill="var(--acc)"/></svg> XML markup</b><span>Completion, hover and F12 from <code>tui.xsd</code>.</span></div>
+      <div><b><svg class="ic" viewBox="0 0 7 7" aria-hidden="true" shape-rendering="crispEdges"><rect x="0" y="0" width="1" height="1" fill="var(--acc)"/><rect x="1" y="0" width="1" height="1" fill="var(--acc)"/><rect x="2" y="0" width="1" height="1" fill="var(--acc)"/><rect x="4" y="0" width="1" height="1" fill="var(--acc2)"/><rect x="5" y="0" width="1" height="1" fill="var(--acc2)"/><rect x="6" y="0" width="1" height="1" fill="var(--acc2)"/><rect x="0" y="1" width="1" height="1" fill="var(--acc)"/><rect x="1" y="1" width="1" height="1" fill="var(--acc)"/><rect x="2" y="1" width="1" height="1" fill="var(--acc)"/><rect x="4" y="1" width="1" height="1" fill="var(--acc2)"/><rect x="5" y="1" width="1" height="1" fill="var(--acc2)"/><rect x="6" y="1" width="1" height="1" fill="var(--acc2)"/><rect x="0" y="2" width="1" height="1" fill="var(--acc)"/><rect x="1" y="2" width="1" height="1" fill="var(--acc)"/><rect x="2" y="2" width="1" height="1" fill="var(--acc)"/><rect x="4" y="2" width="1" height="1" fill="var(--acc2)"/><rect x="5" y="2" width="1" height="1" fill="var(--acc2)"/><rect x="6" y="2" width="1" height="1" fill="var(--acc2)"/><rect x="0" y="4" width="1" height="1" fill="var(--c3)"/><rect x="1" y="4" width="1" height="1" fill="var(--c3)"/><rect x="2" y="4" width="1" height="1" fill="var(--c3)"/><rect x="4" y="4" width="1" height="1" fill="var(--c4)"/><rect x="5" y="4" width="1" height="1" fill="var(--c4)"/><rect x="6" y="4" width="1" height="1" fill="var(--c4)"/><rect x="0" y="5" width="1" height="1" fill="var(--c3)"/><rect x="1" y="5" width="1" height="1" fill="var(--c3)"/><rect x="2" y="5" width="1" height="1" fill="var(--c3)"/><rect x="4" y="5" width="1" height="1" fill="var(--c4)"/><rect x="5" y="5" width="1" height="1" fill="var(--c4)"/><rect x="6" y="5" width="1" height="1" fill="var(--c4)"/><rect x="0" y="6" width="1" height="1" fill="var(--c3)"/><rect x="1" y="6" width="1" height="1" fill="var(--c3)"/><rect x="2" y="6" width="1" height="1" fill="var(--c3)"/><rect x="4" y="6" width="1" height="1" fill="var(--c4)"/><rect x="5" y="6" width="1" height="1" fill="var(--c4)"/><rect x="6" y="6" width="1" height="1" fill="var(--c4)"/></svg> Theme colors</b><span>Real swatches for <code>class=</code> from <code>theme.css</code>.</span></div>
+      <div><b><svg class="ic" viewBox="0 0 7 7" aria-hidden="true" shape-rendering="crispEdges"><rect x="0" y="0" width="1" height="1" fill="var(--c3)"/><rect x="6" y="0" width="1" height="1" fill="var(--c3)"/><rect x="0" y="1" width="1" height="1" fill="var(--c3)"/><rect x="6" y="1" width="1" height="1" fill="var(--c3)"/><rect x="1" y="2" width="1" height="1" fill="var(--c3)"/><rect x="5" y="2" width="1" height="1" fill="var(--c3)"/><rect x="2" y="3" width="1" height="1" fill="var(--c3)"/><rect x="4" y="3" width="1" height="1" fill="var(--c3)"/><rect x="3" y="4" width="1" height="1" fill="var(--c3)"/><rect x="3" y="5" width="1" height="1" fill="var(--c3)"/><rect x="3" y="6" width="1" height="1" fill="var(--c3)"/></svg> Fork counter</b><span>Live subshell count in the status bar.</span></div>
+      <div><b><svg class="ic" viewBox="0 0 8 7" aria-hidden="true" shape-rendering="crispEdges"><rect x="0" y="0" width="1" height="1" fill="var(--acc)"/><rect x="1" y="0" width="1" height="1" fill="var(--acc)"/><rect x="2" y="0" width="1" height="1" fill="var(--acc)"/><rect x="3" y="0" width="1" height="1" fill="var(--acc)"/><rect x="4" y="0" width="1" height="1" fill="var(--acc)"/><rect x="5" y="0" width="1" height="1" fill="var(--acc)"/><rect x="6" y="0" width="1" height="1" fill="var(--acc)"/><rect x="7" y="0" width="1" height="1" fill="var(--acc)"/><rect x="0" y="1" width="1" height="1" fill="var(--acc)"/><rect x="7" y="1" width="1" height="1" fill="var(--acc)"/><rect x="0" y="2" width="1" height="1" fill="var(--acc)"/><rect x="2" y="2" width="1" height="1" fill="var(--acc)"/><rect x="7" y="2" width="1" height="1" fill="var(--acc)"/><rect x="0" y="3" width="1" height="1" fill="var(--acc)"/><rect x="3" y="3" width="1" height="1" fill="var(--acc)"/><rect x="7" y="3" width="1" height="1" fill="var(--acc)"/><rect x="0" y="4" width="1" height="1" fill="var(--acc)"/><rect x="2" y="4" width="1" height="1" fill="var(--acc)"/><rect x="4" y="4" width="1" height="1" fill="var(--acc)"/><rect x="5" y="4" width="1" height="1" fill="var(--acc)"/><rect x="7" y="4" width="1" height="1" fill="var(--acc)"/><rect x="0" y="5" width="1" height="1" fill="var(--acc)"/><rect x="7" y="5" width="1" height="1" fill="var(--acc)"/><rect x="0" y="6" width="1" height="1" fill="var(--acc)"/><rect x="1" y="6" width="1" height="1" fill="var(--acc)"/><rect x="2" y="6" width="1" height="1" fill="var(--acc)"/><rect x="3" y="6" width="1" height="1" fill="var(--acc)"/><rect x="4" y="6" width="1" height="1" fill="var(--acc)"/><rect x="5" y="6" width="1" height="1" fill="var(--acc)"/><rect x="6" y="6" width="1" height="1" fill="var(--acc)"/><rect x="7" y="6" width="1" height="1" fill="var(--acc)"/></svg> CLI &amp; profiling</b><span><code>dabt</code> commands, <code>bash -x</code> traces, fork profiling.</span></div>
+    </section>
+    {% endif %}
+    {% assign doc_section = page.dir | remove: '/' %}
+    <article class="doc"{% if doc_section != '' %} data-pagefind-filter="section:{{ doc_section }}"{% endif %}>
+      {% if page.url != '/' and page.title %}<h1 class="page-title">{{ page.title }}</h1>{% endif %}
+      {{ content }}
+    </article>
+    <footer class="foot">
+      <span>DABT Tools · MIT licensed</span>
+      <a href="{{ site.github.repository_url }}/edit/master/docs/{{ page.path }}">Edit this page</a>
+    </footer>
+  </main>
+</div>
+<script src="{{ '/assets/js/dabt.js' | relative_url }}"></script>
+</body>
+</html>
