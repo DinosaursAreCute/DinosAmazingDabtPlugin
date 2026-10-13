@@ -4,6 +4,7 @@
 // headers as images, "What is new" / "What changed" / "Fixed") follows the DABT release notes.
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const headers = require('./gen-headers');
 
 const root = path.join(__dirname, '..');
@@ -14,7 +15,7 @@ const option = (name) => {
     return i >= 0 ? args[i + 1] : undefined;
 };
 if (!version) {
-    console.error('usage: gen-release-notes.js VERSION [--tagline TEXT] [--intro TEXT] [--out FILE]');
+    console.error('usage: gen-release-notes.js VERSION [--tagline TEXT] [--intro TEXT] [--branch NAME] [--out FILE]');
     process.exit(2);
 }
 
@@ -34,8 +35,19 @@ for (const m of section.split(/^### /m).slice(1)) {
     parts[title.trim()] = body.join('\n').trim();
 }
 
-const HEADERS = 'https://raw.githubusercontent.com/DinosaursAreCute/DinosAmazingDabtPlugin/main/assets/headers';
-const LOGO = 'https://raw.githubusercontent.com/DinosaursAreCute/DinosAmazingDabtPlugin/main/assets/logo.png';
+// raw.githubusercontent.com serves by branch name: a wrong one is a 404 and the images show as their alt text.
+const branch =
+    option('--branch') ??
+    (() => {
+        try {
+            return execFileSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
+        } catch {
+            return 'master';
+        }
+    })();
+const RAW = `https://raw.githubusercontent.com/DinosaursAreCute/DinosAmazingDabtPlugin/${branch}/assets`;
+const HEADERS = `${RAW}/headers`;
+const LOGO = `${RAW}/logo.png`;
 // CHANGELOG heading -> header image name and its alt text, in the order they are written.
 const THEME = [
     ['Added', 'release-new', 'What is new'],
