@@ -43,10 +43,10 @@ Pull the repository, rebuild and reinstall over the old version:
 
 ```bash
 git pull
-npm install
-./scripts/package.sh
-code --install-extension dabt-tools-<version>.vsix --force
+./scripts/install.sh
 ```
+
+`scripts/install.sh` runs the typecheck and tests, builds the minified bundle, packages `dabt-tools-<version>.vsix` and installs it with the first editor CLI it finds (`code`, `codium`, `code-insiders`, `cursor`, `windsurf`). Options: `--editor CMD` (or `$DABT_EDITOR`), `--skip-tests`, `--no-install`.
 
 Then run **Developer: Reload Window**.
 

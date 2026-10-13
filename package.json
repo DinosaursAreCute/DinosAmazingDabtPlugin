@@ -2,7 +2,7 @@
   "name": "dabt-tools",
   "displayName": "DABT Tools",
   "description": "Linting, autocomplete, inlay hints, XML markup tooling, theme-aware colors, subshell counting, CLI and profiling for DinosAmazingBashTui (DABT) apps and plugins.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "dinosaursarecute",
   "private": true,
   "license": "MIT",
@@ -76,6 +76,26 @@
           "type": "boolean",
           "default": true,
           "description": "Hover an internal (_-prefixed) identifier like _DLG_KIND to see what its abbreviation segments (DLG, KIND, ...) stand for, from the bundled glossary at src/data/dabtAbbreviations.json."
+        },
+        "dabt.lint.performance": {
+          "type": "boolean",
+          "default": true,
+          "description": "Information-level hints in callback files (*_callbacks.sh, *.plugin.sh) for external commands with a fork-free bash equivalent (basename, dirname, sed, awk, date, $(echo ...), ...). Add a 'dabt-ignore' comment to silence a line."
+        },
+        "dabt.xml.lint": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check DABT markup pages as you type: unknown elements and attributes, missing required attributes, callbacks with no function, missing src/page files, duplicate ids, undefined theme classes."
+        },
+        "dabt.xml.validateOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run the framework's own markup validator (lib/markup/tui_validate.sh from the detected DABT install) when a page is opened or saved and show its findings. Needs a local DABT install."
+        },
+        "dabt.codeLens.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a CodeLens above each function in callback files with the number of markup attributes that name it."
         }
       }
     },
@@ -200,10 +220,13 @@
   },
   "scripts": {
     "compile": "node esbuild.js",
+    "test": "node scripts/test.js",
+    "typecheck": "tsc --noEmit",
     "watch": "node esbuild.js --watch",
     "package": "node esbuild.js --production",
     "gen-data": "node scripts/gen-data.js",
     "gen-abbrev-candidates": "node scripts/gen-abbrev-candidates.js",
+    "release-notes": "node scripts/gen-release-notes.js",
     "vscode:prepublish": "npm run package",
     "vsix": "vsce package --no-rewrite-relative-links"
   },

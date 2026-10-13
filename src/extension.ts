@@ -19,11 +19,17 @@ import { DabtXmlClassColorProvider } from './xmlClassColor';
 import { DabtXmlClassInlayHintsProvider } from './xmlClassInlayHints';
 import { disposeXmlDecorations, updateXmlDecorations } from './xmlDecorations';
 import { initPage, insertElement } from './xmlCommands';
+import { DabtXmlDiagnostics } from './xmlDiagnostics';
+import { DabtCallbackLensProvider, showCallbackUses } from './callbackLens';
+import { DabtShellSymbolProvider, DabtXmlSymbolProvider } from './outline';
+import { isDabtXmlDocument } from './xmlHeuristics';
 
 const subshellReportChannel = vscode.window.createOutputChannel('DABT Subshells');
 
 export function activate(context: vscode.ExtensionContext) {
     const diagnostics = new DabtDiagnostics();
+    const xmlDiagnostics = new DabtXmlDiagnostics();
+    const callbackLens = new DabtCallbackLensProvider();
     const statusBar = new SubshellStatusBar();
     const inlayHints = new DabtInlayHintsProvider();
     const xmlClassInlayHints = new DabtXmlClassInlayHintsProvider();
@@ -32,6 +38,8 @@ export function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(
         diagnostics,
+        xmlDiagnostics,
+        callbackLens,
         statusBar,
 
         subshellReportChannel,
@@ -67,10 +75,37 @@ export function activate(context: vscode.ExtensionContext) {
             }
         }),
 
-        vscode.workspace.onDidOpenTextDocument((doc) => diagnostics.lint(doc)),
-        vscode.workspace.onDidSaveTextDocument((doc) => diagnostics.lint(doc)),
-        vscode.workspace.onDidChangeTextDocument((e) => diagnostics.lint(e.document)),
-        vscode.workspace.onDidCloseTextDocument((doc) => diagnostics.clear(doc.uri)),
+        vscode.languages.registerDocumentSymbolProvider({ language: 'xml' }, new DabtXmlSymbolProvider()),
+        vscode.languages.registerDocumentSymbolProvider(dabtSelector, new DabtShellSymbolProvider()),
+        vscode.languages.registerCodeLensProvider(dabtSelector, callbackLens),
+        vscode.commands.registerCommand('dabt.showCallbackUses', showCallbackUses),
+        (() => {
+            const watcher = vscode.workspace.createFileSystemWatcher('**/*.xml');
+            watcher.onDidChange(() => callbackLens.invalidate());
+            watcher.onDidCreate(() => callbackLens.invalidate());
+            watcher.onDidDelete(() => callbackLens.invalidate());
+            return watcher;
+        })(),
+
+        vscode.workspace.onDidOpenTextDocument((doc) => {
+            diagnostics.lint(doc);
+            xmlDiagnostics.lint(doc);
+            void xmlDiagnostics.validate(doc);
+        }),
+        vscode.workspace.onDidSaveTextDocument((doc) => {
+            diagnostics.lint(doc);
+            xmlDiagnostics.lint(doc);
+            void xmlDiagnostics.validate(doc);
+            if (isDabtXmlDocument(doc)) callbackLens.invalidate();
+        }),
+        vscode.workspace.onDidChangeTextDocument((e) => {
+            diagnostics.lint(e.document);
+            xmlDiagnostics.lintSoon(e.document);
+        }),
+        vscode.workspace.onDidCloseTextDocument((doc) => {
+            diagnostics.clear(doc.uri);
+            xmlDiagnostics.clear(doc.uri);
+        }),
 
         vscode.window.onDidChangeActiveTextEditor((ed) => statusBar.refresh(ed)),
         vscode.workspace.onDidChangeTextDocument((e) => {
@@ -123,7 +158,11 @@ export function activate(context: vscode.ExtensionContext) {
     refreshDataSources(true);
 
     // Lint whatever's already open when the extension activates.
-    for (const doc of vscode.workspace.textDocuments) diagnostics.lint(doc);
+    for (const doc of vscode.workspace.textDocuments) {
+        diagnostics.lint(doc);
+        xmlDiagnostics.lint(doc);
+        void xmlDiagnostics.validate(doc);
+    }
     statusBar.refresh(vscode.window.activeTextEditor);
     updateXmlDecorations(vscode.window.activeTextEditor);
 }

@@ -39,10 +39,19 @@ class SchemaIndex {
     }
 }
 
-// Attributes on any DABT widget element (action/on_visit/on_change/submit)
+// Attributes on any DABT widget element (action, on_visit, on_change, submit, on_resize, ...)
 // that carry the name of a bash callback function - what the "jump to /
 // hover the callback" cross-reference feature keys off. `page` is
 // deliberately excluded: it names an xml file, not a function.
-export const CALLBACK_ATTRS = new Set(['action', 'on_visit', 'on_change', 'submit']);
+export const CALLBACK_ATTRS = new Set([
+    'action',
+    'on_visit',
+    'on_change',
+    'on_resize',
+    'on_toggle',
+    'on_detach',
+    'on_dock',
+    'submit',
+]);
 
 export const schemaIndex = new SchemaIndex(bundledData);

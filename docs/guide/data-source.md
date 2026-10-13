@@ -2,6 +2,8 @@
 
 Every DABT-aware feature reads from two indexes: the **API index** (every function in DABT's `lib/`, with signature, doc and parameters) and the **schema index** (every element and attribute in `share/tui.xsd`). Neither is hand-written. Both are parsed from a real DABT tree.
 
+The schema parser expands named XSD child and attribute groups, so shared pane/layer attributes and nested child-element lists are included in both live scans and the bundled snapshot.
+
 ## Where the data comes from
 
 The first source that applies wins:

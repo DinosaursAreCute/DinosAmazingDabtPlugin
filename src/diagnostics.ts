@@ -1,12 +1,17 @@
 import * as vscode from 'vscode';
 import { apiIndex, isPrivateName } from './apiData';
-import { isDabtFrameworkSource, looksLikeDabtFile } from './fileHeuristics';
+import { isCallbackFile, isDabtFrameworkSource, looksLikeDabtFile } from './fileHeuristics';
+import { findForkCalls } from './forkLint';
+import { maskLine } from './shellMask';
 
 const CALL_RE = /(?<![.\w])((?:_tui\.[A-Za-z0-9_.]+)|(?:_tui_[A-Za-z0-9_.]+)|(?:_exec_[A-Za-z0-9_.]+)|(?:_tr_[A-Za-z0-9_.]+)|(?:_[A-Za-z][A-Za-z0-9_.]*))\s*(?=\S|\s*$)/g;
 
 interface Rule {
     id: string;
     severity: vscode.DiagnosticSeverity;
+    // Which view of the line the rule reads (see shellMask.ts): `noComment` keeps double-quoted
+    // text, `code` sees only unquoted words.
+    view: 'noComment' | 'code';
     // Returns diagnostics for a single line of source (fast, avoids a real parser).
     check(lineText: string, lineNo: number, ctx: RuleContext): vscode.Diagnostic[];
 }
@@ -14,6 +19,8 @@ interface Rule {
 interface RuleContext {
     document: vscode.TextDocument;
     isFrameworkSource: boolean;
+    isCallbackFile: boolean;
+    rawLine: string; // the unmasked line, for messages that quote source text
 }
 
 function mkDiag(
@@ -34,10 +41,9 @@ function mkDiag(
 const privateCallRule: Rule = {
     id: 'dabt-private-call',
     severity: vscode.DiagnosticSeverity.Warning,
+    view: 'noComment',
     check(lineText, lineNo, ctx) {
         if (ctx.isFrameworkSource) return [];
-        const trimmed = lineText.trimStart();
-        if (trimmed.startsWith('#')) return [];
         const out: vscode.Diagnostic[] = [];
         for (const m of lineText.matchAll(CALL_RE)) {
             const name = m[1];
@@ -70,6 +76,7 @@ const privateCallRule: Rule = {
 const tickClobberRule: Rule = {
     id: 'dabt-tick-clobber',
     severity: vscode.DiagnosticSeverity.Warning,
+    view: 'noComment',
     check(lineText, lineNo, ctx) {
         if (ctx.isFrameworkSource) return [];
         const m = /\b_TUI_TICK_FN\s*=/.exec(lineText);
@@ -93,6 +100,7 @@ const tickClobberRule: Rule = {
 const mouseDrainRule: Rule = {
     id: 'dabt-mouse-drain-zero',
     severity: vscode.DiagnosticSeverity.Error,
+    view: 'noComment',
     check(lineText, lineNo) {
         const m = /\bTUI_MOUSE_DRAIN_PEEK_TIMEOUT\s*=\s*0\b/.exec(lineText);
         if (!m) return [];
@@ -113,15 +121,17 @@ const mouseDrainRule: Rule = {
 const uselessCatRule: Rule = {
     id: 'dabt-useless-cat',
     severity: vscode.DiagnosticSeverity.Information,
-    check(lineText, lineNo) {
+    view: 'code',
+    check(lineText, lineNo, ctx) {
         const out: vscode.Diagnostic[] = [];
         for (const m of lineText.matchAll(/\bcat\s+(\S+)\s*\|\s*([A-Za-z0-9_.]+)/g)) {
+            const file = ctx.rawLine.substr((m.index ?? 0) + m[0].indexOf(m[1], 3), m[1].length);
             out.push(
                 mkDiag(
                     lineNo,
                     m.index ?? 0,
                     (m.index ?? 0) + m[0].length,
-                    `Useless use of cat: '${m[2]} < ${m[1]}' (or '${m[2]} "${m[1]}"' if it supports it) avoids an extra fork.`,
+                    `Useless use of cat: '${m[2]} < ${file}' (or '${m[2]} ${file}' if it supports it) avoids an extra fork.`,
                     vscode.DiagnosticSeverity.Information,
                     'dabt-useless-cat'
                 )
@@ -134,6 +144,7 @@ const uselessCatRule: Rule = {
 const backtickRule: Rule = {
     id: 'dabt-backtick-subst',
     severity: vscode.DiagnosticSeverity.Information,
+    view: 'noComment',
     check(lineText, lineNo) {
         const out: vscode.Diagnostic[] = [];
         // Cheap heuristic: an even backtick count on the line, take pairs.
@@ -158,6 +169,7 @@ const backtickRule: Rule = {
 const echoDashERule: Rule = {
     id: 'dabt-echo-dash-e',
     severity: vscode.DiagnosticSeverity.Information,
+    view: 'code',
     check(lineText, lineNo) {
         const m = /\becho\s+-e\b/.exec(lineText);
         if (!m) return [];
@@ -181,6 +193,7 @@ const echoDashERule: Rule = {
 const pipedWhileReadRule: Rule = {
     id: 'dabt-piped-while-read-subshell',
     severity: vscode.DiagnosticSeverity.Warning,
+    view: 'code',
     check(lineText, lineNo) {
         const m = /\|\s*while\s+(read|IFS=)/.exec(lineText);
         if (!m) return [];
@@ -197,6 +210,27 @@ const pipedWhileReadRule: Rule = {
     },
 };
 
+// Rule: external commands with a fork-free bash equivalent, in callbacks (which run on input
+// and refresh paths). Advice only; skipped in framework source and non-callback scripts.
+const forkRule: Rule = {
+    id: 'dabt-fork-in-callback',
+    severity: vscode.DiagnosticSeverity.Information,
+    view: 'code',
+    check(lineText, lineNo, ctx) {
+        if (ctx.isFrameworkSource || !ctx.isCallbackFile) return [];
+        return findForkCalls(lineText).map((f) =>
+            mkDiag(
+                lineNo,
+                f.start,
+                f.start + f.length,
+                `'${f.command}' forks a process. Prefer ${f.advice} in callbacks; the cost matters on input and refresh paths (silence a line with a 'dabt-ignore' comment).`,
+                vscode.DiagnosticSeverity.Information,
+                'dabt-fork-in-callback'
+            )
+        );
+    },
+};
+
 const RULES: Rule[] = [
     privateCallRule,
     tickClobberRule,
@@ -205,6 +239,7 @@ const RULES: Rule[] = [
     backtickRule,
     echoDashERule,
     pipedWhileReadRule,
+    forkRule,
 ];
 
 export class DabtDiagnostics {
@@ -225,19 +260,26 @@ export class DabtDiagnostics {
             return;
         }
         const flagPrivate = vscode.workspace.getConfiguration('dabt').get<boolean>('lint.flagPrivateCalls', true);
+        const flagForks = vscode.workspace.getConfiguration('dabt').get<boolean>('lint.performance', true);
 
         const ctx: RuleContext = {
+            rawLine: '',
             document,
             isFrameworkSource: isDabtFrameworkSource(document),
+            isCallbackFile: isCallbackFile(document),
         };
 
         const diags: vscode.Diagnostic[] = [];
         const lineCount = document.lineCount;
         for (let i = 0; i < lineCount; i++) {
             const lineText = document.lineAt(i).text;
+            if (lineText.includes('dabt-ignore')) continue;
+            const views = maskLine(lineText);
+            ctx.rawLine = lineText;
             for (const rule of RULES) {
                 if (rule.id === 'dabt-private-call' && !flagPrivate) continue;
-                diags.push(...rule.check(lineText, i, ctx));
+                if (rule.id === 'dabt-fork-in-callback' && !flagForks) continue;
+                diags.push(...rule.check(views[rule.view], i, ctx));
             }
         }
         this.collection.set(document.uri, diags);

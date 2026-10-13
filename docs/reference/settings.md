@@ -12,6 +12,10 @@ All settings live under `dabt.*`. Set them in **Settings → Extensions → DABT
 | `dabt.subshells.showInStatusBar` | boolean | `true` | Show a live subshell/fork count for the active shell script in the status bar. |
 | `dabt.inlayHints.enable` | boolean | `true` | Show inline parameter-name hints at each positional argument of a recognized DABT function call. |
 | `dabt.abbreviations.enable` | boolean | `true` | Hover an internal (_-prefixed) identifier like _DLG_KIND to see what its abbreviation segments (DLG, KIND, ...) stand for, from the bundled glossary at src/data/dabtAbbreviations.json. |
+| `dabt.lint.performance` | boolean | `true` | Information-level hints in callback files for external commands with a fork-free bash equivalent. A `dabt-ignore` comment silences a line. |
+| `dabt.xml.lint` | boolean | `true` | Check DABT markup pages as you type: unknown elements and attributes, missing required attributes, undefined callbacks, missing files, duplicate ids, unknown theme classes. |
+| `dabt.xml.validateOnSave` | boolean | `true` | Run the framework's markup validator on a page when it is opened or saved. Needs a local DABT install. |
+| `dabt.codeLens.enable` | boolean | `true` | Show the number of markup uses above each function in callback files. |
 
 ## Examples
 

@@ -1,13 +1,16 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
+import { parseFunctionDefs } from './shellFunctions';
 
 // Real DABT pages are plain `.xml` (root <tui>), not a special extension -
 // so this keys off content, the same way looksLikeDabtFile does for shell
 // scripts, rather than requiring any particular file name.
 export function isDabtXmlDocument(document: vscode.TextDocument): boolean {
-    if (document.languageId !== 'xml') return false;
-    const text = document.getText();
+    return document.languageId === 'xml' && isDabtXmlText(document.getText());
+}
+
+export function isDabtXmlText(text: string): boolean {
     return /<tui[\s>]/.test(text) || /<pane[\s>]/.test(text) || /noNamespaceSchemaLocation="[^"]*tui\.xsd"/.test(text);
 }
 
@@ -57,20 +60,11 @@ export function findSiblingXmlFiles(document: vscode.TextDocument): string[] {
     }
 }
 
-// Function definitions found in a callback file: `name() {` at line start.
+// Function definitions found in a callback file (see shellFunctions.ts).
 export function findFunctionDefsInFile(absPath: string): Array<{ name: string; line: number }> {
-    let text: string;
     try {
-        text = fs.readFileSync(absPath, 'utf8');
+        return parseFunctionDefs(fs.readFileSync(absPath, 'utf8'));
     } catch {
         return [];
     }
-    const out: Array<{ name: string; line: number }> = [];
-    const lines = text.split('\n');
-    const re = /^([A-Za-z_][A-Za-z0-9_.]*)\s*\(\)\s*\{/;
-    for (let i = 0; i < lines.length; i++) {
-        const m = re.exec(lines[i]);
-        if (m) out.push({ name: m[1], line: i });
-    }
-    return out;
 }

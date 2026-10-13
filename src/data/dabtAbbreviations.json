@@ -1,37 +1,37 @@
 {
-  "generatedAt": "2026-09-23",
+  "generatedAt": "2026-10-13",
   "entries": [
-    { "abbr": "DLG", "meaning": "Dialog — modal dialog/prompt/chooser/toast state", "subsystem": "lib/chrome/tui_dialog.sh" },
+    { "abbr": "DLG", "meaning": "Dialog - modal dialog/prompt/chooser/toast state", "subsystem": "lib/chrome/tui_dialog.sh" },
     { "abbr": "TUI", "meaning": "The TUI framework's own core-engine namespace", "subsystem": "lib/tui.sh" },
     {
       "abbr": "P",
-      "meaning": "Pane — per-pane layout state (row/col/width/height/children/scroll, in _TUI_P_* fields). Also reused for \"Program\" in tui_sync.sh's TUI_SYNC_P_ADD/UPDATE/SAME/REMOVE diff-plan arrays.",
+      "meaning": "Pane - per-pane layout state (row/col/width/height/children/scroll, in _TUI_P_* fields). Also reused for \"Program\" in tui_sync.sh's TUI_SYNC_P_ADD/UPDATE/SAME/REMOVE diff-plan arrays.",
       "subsystem": "lib/tui.sh, lib/tui_api.sh"
     },
     {
       "abbr": "W",
-      "meaning": "Widget — per-widget state (type/pane/value/label/action, in _TUI_W_* fields)",
+      "meaning": "Widget - per-widget state (type/pane/value/label/action, in _TUI_W_* fields)",
       "subsystem": "lib/tui_api.sh, lib/widgets/tui_widgets.sh"
     },
-    { "abbr": "WSR", "meaning": "Widget Screen Row — resolved draw position from _tui._widget_pos", "subsystem": "lib/tui.sh" },
-    { "abbr": "WSC", "meaning": "Widget Screen Col — resolved draw position from _tui._widget_pos", "subsystem": "lib/tui.sh" },
-    { "abbr": "WSW", "meaning": "Widget Screen Width — resolved draw size from _tui._widget_pos", "subsystem": "lib/tui.sh" },
-    { "abbr": "WSH", "meaning": "Widget Screen Height — resolved draw size from _tui._widget_pos", "subsystem": "lib/tui.sh" },
-    { "abbr": "TX", "meaning": "Text — prefix for the text-editing engine's per-widget state (input/password/textarea)", "subsystem": "lib/widgets/tui_text.sh" },
+    { "abbr": "WSR", "meaning": "Widget Screen Row - resolved draw position from _tui._widget_pos", "subsystem": "lib/tui.sh" },
+    { "abbr": "WSC", "meaning": "Widget Screen Col - resolved draw position from _tui._widget_pos", "subsystem": "lib/tui.sh" },
+    { "abbr": "WSW", "meaning": "Widget Screen Width - resolved draw size from _tui._widget_pos", "subsystem": "lib/tui.sh" },
+    { "abbr": "WSH", "meaning": "Widget Screen Height - resolved draw size from _tui._widget_pos", "subsystem": "lib/tui.sh" },
+    { "abbr": "TX", "meaning": "Text - prefix for the text-editing engine's per-widget state (input/password/textarea)", "subsystem": "lib/widgets/tui_text.sh" },
     { "abbr": "TXC", "meaning": "cursor position", "subsystem": "lib/widgets/tui_text.sh" },
     { "abbr": "TXA", "meaning": "selection anchor (-1 = no selection)", "subsystem": "lib/widgets/tui_text.sh" },
     { "abbr": "TXS", "meaning": "horizontal scroll offset", "subsystem": "lib/widgets/tui_text.sh" },
-    { "abbr": "TXW", "meaning": "wanted column — remembered column for up/down nav across shorter lines", "subsystem": "lib/widgets/tui_text.sh" },
-    { "abbr": "TXH", "meaning": "rows shown — visible height of a textarea", "subsystem": "lib/widgets/tui_text.sh" },
+    { "abbr": "TXW", "meaning": "wanted column - remembered column for up/down nav across shorter lines", "subsystem": "lib/widgets/tui_text.sh" },
+    { "abbr": "TXH", "meaning": "rows shown - visible height of a textarea", "subsystem": "lib/widgets/tui_text.sh" },
     { "abbr": "TXF", "meaning": "keep-cursor-in-view-on-next-draw flag (0 after a wheel scroll)", "subsystem": "lib/widgets/tui_text.sh" },
     {
       "abbr": "TXLK",
-      "meaning": "last edit kind (type/move/undo) — coalesces consecutive keystrokes into one undo step",
+      "meaning": "last edit kind (type/move/undo) - coalesces consecutive keystrokes into one undo step",
       "subsystem": "lib/widgets/tui_text.sh"
     },
     {
       "abbr": "TXLP",
-      "meaning": "last edit cursor position — compared to detect a break in typing",
+      "meaning": "last edit cursor position - compared to detect a break in typing",
       "subsystem": "lib/widgets/tui_text.sh"
     },
     { "abbr": "TXLS", "meaning": "line-start byte offsets, cached by _tui_text.index", "subsystem": "lib/widgets/tui_text.sh" },
@@ -43,10 +43,10 @@
     { "abbr": "TXRN", "meaning": "redo stack: entry count", "subsystem": "lib/widgets/tui_text.sh" },
     {
       "abbr": "TXG",
-      "meaning": "field geometry of the widget's last draw (origin row/col, width, rows) — used for mouse-click-to-cursor mapping",
+      "meaning": "field geometry of the widget's last draw (origin row/col, width, rows) - used for mouse-click-to-cursor mapping",
       "subsystem": "lib/widgets/tui_text.sh"
     },
-    { "abbr": "PV", "meaning": "paint value — one rendered/painted line of a text widget", "subsystem": "lib/widgets/tui_text.sh" },
+    { "abbr": "PV", "meaning": "paint value - one rendered/painted line of a text widget", "subsystem": "lib/widgets/tui_text.sh" },
     { "abbr": "SA", "meaning": "selection start offset", "subsystem": "lib/widgets/tui_text.sh" },
     { "abbr": "SB", "meaning": "selection end offset", "subsystem": "lib/widgets/tui_text.sh" },
     { "abbr": "LC", "meaning": "line count", "subsystem": "lib/widgets/tui_text.sh" },
@@ -59,7 +59,7 @@
     { "abbr": "WXA", "meaning": "per-widget items array, via nameref _WXI_<id>", "subsystem": "lib/widgets/tui_widgets.sh" },
     {
       "abbr": "TA",
-      "meaning": "internal state for lib/tui_api.sh (the public callback/app helper API) — e.g. scheduled tui.every/tui.after jobs, tui.watch background jobs",
+      "meaning": "internal state for lib/tui_api.sh (the public callback/app helper API) - e.g. scheduled tui.every/tui.after jobs, tui.watch background jobs",
       "subsystem": "lib/tui_api.sh"
     },
     { "abbr": "WPANE", "meaning": "target pane for a tui.watch background job", "subsystem": "lib/tui_api.sh" },
@@ -72,44 +72,44 @@
     { "abbr": "TPL", "meaning": "plugin registry state (loaded <script> plugins)", "subsystem": "lib/plugin/tui_plugin.sh" },
     {
       "abbr": "TP",
-      "meaning": "Theme Parse — staging arrays for one freshly-parsed theme/CSS file, before _tui.theme_commit merges it into the committed _TUI_CLASS_* tables",
+      "meaning": "Theme Parse - staging arrays for one freshly-parsed theme/CSS file, before _tui.theme_commit merges it into the committed _TUI_CLASS_* tables",
       "subsystem": "lib/style/tui_style.sh"
     },
     {
       "abbr": "RUI",
-      "meaning": "Resolve UI — the interactive conflict-resolution dialog loop for tui.sync.resolve_ui",
+      "meaning": "Resolve UI - the interactive conflict-resolution dialog loop for tui.sync.resolve_ui",
       "subsystem": "lib/apps/tui_update.sh"
     },
     { "abbr": "DAPK", "meaning": "the dapk package-manager subsystem's own short name (dabt pkg / dapk.* functions)", "subsystem": "lib/dapk" },
-    { "abbr": "PM", "meaning": "Package Manager — pacman/apt/dnf/zypper/apk/brew install command lines", "subsystem": "lib/dapk/deps.sh" },
+    { "abbr": "PM", "meaning": "Package Manager - pacman/apt/dnf/zypper/apk/brew install command lines", "subsystem": "lib/dapk/deps.sh" },
     { "abbr": "VCMP", "meaning": "Version CoMPare result (-1|0|1, semver precedence)", "subsystem": "lib/dapk/version.sh" },
     {
       "abbr": "BI",
-      "meaning": "Build Item — one `include file|dir` entry being accumulated for dabt build's manifest",
+      "meaning": "Build Item - one `include file|dir` entry being accumulated for dabt build's manifest",
       "subsystem": "lib/dapk/cmd/build.sh"
     },
     {
       "abbr": "PC",
-      "meaning": "Pane Current — the pane keyboard actions start from (focused pane → focused widget's pane → hovered pane)",
+      "meaning": "Pane Current - the pane keyboard actions start from (focused pane → focused widget's pane → hovered pane)",
       "subsystem": "lib/input/tui_input.sh"
     },
-    { "abbr": "NAVP", "meaning": "NAV Panes — visible leaf panes worth keyboard-focusing (Tab/arrow navigation)", "subsystem": "lib/input/tui_input.sh" },
+    { "abbr": "NAVP", "meaning": "NAV Panes - visible leaf panes worth keyboard-focusing (Tab/arrow navigation)", "subsystem": "lib/input/tui_input.sh" },
     {
       "abbr": "REVK",
-      "meaning": "REVerse Keys — command → key-hint lookup, the inverse of the normal key→command bind table",
+      "meaning": "REVerse Keys - command → key-hint lookup, the inverse of the normal key→command bind table",
       "subsystem": "lib/input/tui_input.sh"
     },
-    { "abbr": "BL", "meaning": "Bind List — flattened rows of all active keybindings", "subsystem": "lib/input/tui_input.sh" },
-    { "abbr": "HIT", "meaning": "mouse hit-test result — which pane the pointer is currently over", "subsystem": "lib/tui.sh" },
+    { "abbr": "BL", "meaning": "Bind List - flattened rows of all active keybindings", "subsystem": "lib/input/tui_input.sh" },
+    { "abbr": "HIT", "meaning": "mouse hit-test result - which pane the pointer is currently over", "subsystem": "lib/tui.sh" },
     {
       "abbr": "TRV",
-      "meaning": "TR Value — fork-free scratch return value for terminal_renderer.sh's `_v`-suffixed helpers (avoids a subshell per call)",
+      "meaning": "TR Value - fork-free scratch return value for terminal_renderer.sh's `_v`-suffixed helpers (avoids a subshell per call)",
       "subsystem": "lib/terminal_renderer.sh"
     },
     { "abbr": "TR", "meaning": "Terminal Renderer", "subsystem": "lib/terminal_renderer.sh" },
     {
       "abbr": "SGR",
-      "meaning": "Select Graphic Rendition — the standard ANSI escape-code family for color/bold/underline/etc (not DABT-specific)",
+      "meaning": "Select Graphic Rendition - the standard ANSI escape-code family for color/bold/underline/etc (not DABT-specific)",
       "subsystem": "lib/style/tui_style.sh"
     },
     {
@@ -119,16 +119,351 @@
     },
     {
       "abbr": "EXEC",
-      "meaning": "Background Execution — tui.exec's tracked background-process instances (iid -> command/PID/pane/status/…)",
+      "meaning": "Background Execution - tui.exec's tracked background-process instances (iid -> command/PID/pane/status/…)",
       "subsystem": "lib/tui.sh"
     },
-    { "abbr": "TST", "meaning": "Toast — the parallel arrays behind tui.notify's toast notifications", "subsystem": "lib/chrome/tui_dialog.sh" },
-    { "abbr": "PUB", "meaning": "Publish — dapk.publish's GitHub-release state (repo/tag/name/body/assets/…)", "subsystem": "lib/dapk/publish.sh" },
-    { "abbr": "DC", "meaning": "DAPK Collect — staging state while gathering files for a package", "subsystem": "lib/dapk/collect.sh" },
+    { "abbr": "TST", "meaning": "Toast - the parallel arrays behind tui.notify's toast notifications", "subsystem": "lib/chrome/tui_dialog.sh" },
+    { "abbr": "PUB", "meaning": "Publish - dapk.publish's GitHub-release state (repo/tag/name/body/assets/…)", "subsystem": "lib/dapk/publish.sh" },
+    { "abbr": "DC", "meaning": "DAPK Collect - staging state while gathering files for a package", "subsystem": "lib/dapk/collect.sh" },
     {
       "abbr": "UBIND",
-      "meaning": "User Bind — user-defined keybindings (as opposed to code/default binds), serialized to/from config",
+      "meaning": "User Bind - user-defined keybindings (as opposed to code/default binds), serialized to/from config",
       "subsystem": "lib/input/tui_input.sh"
+    },
+    {
+      "abbr": "MD",
+      "meaning": "Markdown - the markdown renderer's tables and per-render scratch (_TUI_MD_*, _MD_*): styles, link/image tables, row output",
+      "subsystem": "lib/markdown/"
+    },
+    {
+      "abbr": "TV",
+      "meaning": "Tui Validate - the markup validator's rule tables, walk state and findings (_TV_*)",
+      "subsystem": "lib/markup/tui_validate.sh"
+    },
+    {
+      "abbr": "TVR",
+      "meaning": "Tui Validate Rules - scratch state of the default validator rules (_TVR_*: grid, tab order, rail and layer checks)",
+      "subsystem": "lib/markup/tui_validate_rules.sh"
+    },
+    {
+      "abbr": "RZ",
+      "meaning": "Resize - pane-resize handles and the drag in progress (_RZ_* scratch, _TUI_RZ_* state)",
+      "subsystem": "lib/layout/tui_resize.sh"
+    },
+    {
+      "abbr": "HZ",
+      "meaning": "Hit Zone - registered mouse zones plus hover and dirty state (_TUI_HZ_*). In _TC_HZ it is the horizontal edge glyph of a border style",
+      "subsystem": "lib/input/tui_hit.sh"
+    },
+    {
+      "abbr": "L",
+      "meaning": "Layer - per-layer fields of windows, popups, modals and toasts (_TUI_L_ROW/COL/H/W/F/..., indexed by layer id)",
+      "subsystem": "lib/chrome/tui_layer.sh"
+    },
+    {
+      "abbr": "LY",
+      "meaning": "Layout - results and scratch of the size-spec resolver (_LY_R cells, _LY_SPECS, _LY_MAXS)",
+      "subsystem": "lib/layout/tui_layout.sh"
+    },
+    {
+      "abbr": "TJ",
+      "meaning": "Tui Job - background job tables keyed by job id (_TJ_PID, _TJ_FILES, _TJ_START, _TJ_DELAY, _TJ_SHOWN)",
+      "subsystem": "lib/tui_job.sh"
+    },
+    {
+      "abbr": "RF",
+      "meaning": "Refresh - signatures and scratch of tui.page.refresh's incremental rebuild (_RF_S, _RF_BAD, _RF_OWN)",
+      "subsystem": "lib/markup/tui_refresh.sh"
+    },
+    {
+      "abbr": "TC",
+      "meaning": "Canvas - line-drawing glyph set of a border style: corners _TC_TL/TR/BL/BR, edges _TC_HZ/_TC_VT, title caps _TC_CAP_L/R",
+      "subsystem": "lib/render/tui_canvas.sh"
+    },
+    {
+      "abbr": "CL",
+      "meaning": "Collapse in collapse.sh (_CL_P focus pane, _CL_G, _CL_S); in _CL_ROW/_CL_COL it is the clamped layer rectangle from _tui_layer.clamp",
+      "subsystem": "lib/layout/tui_collapse.sh, lib/chrome/tui_layer.sh"
+    },
+    {
+      "abbr": "CR",
+      "meaning": "Content Rect - the leaf output area of a pane (_CR_R/_CR_C/_CR_H/_CR_W from _tui._content_rect)",
+      "subsystem": "lib/tui.sh"
+    },
+    {
+      "abbr": "AR",
+      "meaning": "Anchor Rect - the rectangle a layer's x / y are measured from (_AR_R/_AR_C/_AR_H/_AR_W)",
+      "subsystem": "lib/chrome/tui_layer.sh"
+    },
+    {
+      "abbr": "CN",
+      "meaning": "Content Need - per-pane content maxima gathered in one pass during tui.render (_TUI_CN_ROW/_LEN, _TUI_CN_ON)",
+      "subsystem": "lib/tui.sh"
+    },
+    {
+      "abbr": "WT",
+      "meaning": "Widget Type - per-type contract tables of measure/draw/hit/key handlers (_TUI_WT_MEASURE/_DRAW/_HIT/_KEY)",
+      "subsystem": "lib/widgets/tui_widget_contract.sh"
+    },
+    {
+      "abbr": "WP",
+      "meaning": "Widget Position - state of the widget placement pass: reuse flag, last pane and its insets (_TUI_WP_*)",
+      "subsystem": "lib/input/tui_hit.sh, lib/tui.sh"
+    },
+    {
+      "abbr": "IV",
+      "meaning": "Inset Vertical - vertical inset widgets of one pane share (_TUI_WP_IV)",
+      "subsystem": "lib/tui.sh"
+    },
+    {
+      "abbr": "IH",
+      "meaning": "Inset Horizontal - horizontal inset widgets of one pane share (_TUI_WP_IH)",
+      "subsystem": "lib/tui.sh"
+    },
+    {
+      "abbr": "RC",
+      "meaning": "Row Cache - cache of rendered rows (_TUI_RC_*); _TUI_RC_EPOCH is bumped by every style write and page reset",
+      "subsystem": "lib/render/tui_rowcache.sh"
+    },
+    {
+      "abbr": "FL",
+      "meaning": "Function Layers - draw functions registered with tui.layer.fn_add: _TUI_FL_ORDER, _TUI_FL_AMBIENT, _TUI_FL_TOP",
+      "subsystem": "lib/chrome/tui_layer.sh"
+    },
+    {
+      "abbr": "TW",
+      "meaning": "Terminal Write - output chunking and the terminal-write probe (_TW_CHUNKS pieces of at most _TUI_WRITE_MAX bytes, _TR_TW)",
+      "subsystem": "lib/render/tui_emit.sh, lib/terminal_renderer.sh"
+    },
+    {
+      "abbr": "TB",
+      "meaning": "Table - scratch of the markdown table renderer (_TB_CELLS, _TB_LINES, _TB_ALIGN)",
+      "subsystem": "lib/markdown/tui_markdown_table.sh"
+    },
+    {
+      "abbr": "OP",
+      "meaning": "Operation - results of markup node operations (_OP_NODES selection, _OP_CLONES, _OP_LIST, _OP_PARAMS)",
+      "subsystem": "lib/markup/tui_ops.sh, lib/markup/tui_addon.sh"
+    },
+    {
+      "abbr": "N",
+      "meaning": "Node - markup node tables indexed by node id (_N_TYPE, _N_KIDS, _N_PARENT, _N_ATTR_V, _N_BY_ID)",
+      "subsystem": "lib/markup/tui_node.sh"
+    },
+    {
+      "abbr": "SH",
+      "meaning": "Shell - the page shell a page names in <tui shell=...> (_SH_OF path, _SH_NAMES engine variables a build can change)",
+      "subsystem": "lib/markup/tui_shell.sh"
+    },
+    {
+      "abbr": "SHL",
+      "meaning": "Shell Flags - declare flags of the engine variables recorded from a `declare -p` dump (_SHL_FLAGS, _SHL_RECORD)",
+      "subsystem": "lib/markup/tui_shell.sh"
+    },
+    {
+      "abbr": "SC",
+      "meaning": "Scroll - scratch of pane scrolling (_SC_MAX max offset, _SC_OLD previous offset, _SC_BAR scrollbar geometry)",
+      "subsystem": "lib/layout/tui_scroll.sh"
+    },
+    {
+      "abbr": "ST",
+      "meaning": "State - restore flag of the store (_ST_RELAYOUT: a restore moved a pane edge). In _TV_ST_* it is the validator's element Stack",
+      "subsystem": "lib/state/tui_store.sh, lib/markup/tui_validate.sh"
+    },
+    {
+      "abbr": "SP",
+      "meaning": "Store Page - key of the page a persisted store entry belongs to (_tui_store.page -> _SP)",
+      "subsystem": "lib/state/tui_store.sh"
+    },
+    {
+      "abbr": "SFL",
+      "meaning": "Store Fields - the fields a page keeps for an id (_tui_store.fields -> _SFL)",
+      "subsystem": "lib/state/tui_store.sh"
+    },
+    {
+      "abbr": "SIDS",
+      "meaning": "State IDs - widget and pane ids whose state the store saves and restores",
+      "subsystem": "lib/state/tui_store.sh"
+    },
+    {
+      "abbr": "PL",
+      "meaning": "Plugin - fields parsed from a plugin file header (_PL_NAME, _PL_TITLE, _PL_VER, _PL_DESC, _PL_AUTHOR, _PL_REQ, _PL_DEF)",
+      "subsystem": "lib/plugin/tui_plugin.sh"
+    },
+    {
+      "abbr": "PG",
+      "meaning": "Progress - state of the dapk command-line progress bar (_PG_LABEL, _PG_TOTAL, _PG_CUR)",
+      "subsystem": "lib/dapk/ui.sh"
+    },
+    {
+      "abbr": "DM",
+      "meaning": "Dapk Manifest - hash and children tables used while building a package manifest (_DM_HASH, _DM_KIDS, _DM_SHA)",
+      "subsystem": "lib/dapk/manifest.sh"
+    },
+    {
+      "abbr": "DD",
+      "meaning": "Dapk Deps - dependency table read with keys like _DD[N.name] and _DD[N.check]",
+      "subsystem": "lib/dapk/deps.sh"
+    },
+    {
+      "abbr": "VW",
+      "meaning": "Visible Width - memo and escape-sequence patterns for the printed width of a string (_TUI_VW_MEMO, _TUI_VW_CSI/_OSC)",
+      "subsystem": "lib/tui.sh"
+    },
+    {
+      "abbr": "VS",
+      "meaning": "Visible Slice - the MAX visible columns of a line after skipping OFF, memoised (_VS, _TUI_VS_MEMO)",
+      "subsystem": "lib/tui.sh"
+    },
+    {
+      "abbr": "VL",
+      "meaning": "Visual Length - cell width of a plain string, continuation bytes not counted (_tui_md.cellw -> _VL)",
+      "subsystem": "lib/markdown/tui_markdown.sh"
+    },
+    {
+      "abbr": "MODS",
+      "meaning": "Modifiers - \"ctrl+alt+shift+\" style prefix decoded from an xterm modifier parameter (_tui_input.mods -> _MODS)",
+      "subsystem": "lib/input/tui_input.sh"
+    },
+    {
+      "abbr": "US",
+      "meaning": "Microseconds - integer time values (_TUI_NOW_US, _TUI_PERF_NOW_US, _JOB_FRAME_US), taken from EPOCHREALTIME",
+      "subsystem": "lib/perf.sh, lib/tui.sh"
+    },
+    {
+      "abbr": "B64",
+      "meaning": "Base64 - encoded signature and key material (_B64, _SIGN_B64)",
+      "subsystem": "lib/dapk/sign.sh, lib/dapk/verify.sh"
+    },
+    {
+      "abbr": "FPR",
+      "meaning": "Fingerprint - key fingerprint (_SIGN_FPR, _VERIFY_FPR)",
+      "subsystem": "lib/dapk/sign.sh, lib/dapk/verify.sh"
+    },
+    {
+      "abbr": "PTY",
+      "meaning": "Pseudo-Terminal - how an exec widget's command is attached to a pty (_EXEC_PTY, _EXEC_PTY_KIND)",
+      "subsystem": "lib/exec/tui_exec.sh"
+    },
+    {
+      "abbr": "CI",
+      "meaning": "Continuous Integration - the CI system detection and its build number in packaging (_CI_PATH, _CI_ERROR)",
+      "subsystem": "lib/dapk/ci.sh"
+    },
+    {
+      "abbr": "SLURP",
+      "meaning": "Slurp - whole file contents in a variable, trailing newlines removed (_tui_cache_slurp -> _SLURP)",
+      "subsystem": "lib/markup/tui_cache.sh"
+    },
+    {
+      "abbr": "SEG",
+      "meaning": "Segment - one markdown image as placeholder rows (_SEG_COLS, _SEG_ROWS, _SEG_LINES)",
+      "subsystem": "lib/markdown/tui_markdown_img.sh"
+    },
+    {
+      "abbr": "IMGP",
+      "meaning": "Image Path - the PNG a source image was converted to (_tui_md.convert -> _IMGP)",
+      "subsystem": "lib/markdown/tui_markdown_img.sh"
+    },
+    {
+      "abbr": "PW",
+      "meaning": "Pixel Width - width of a PNG read from its header (_PW; _PH is the height)",
+      "subsystem": "lib/markdown/tui_markdown_img.sh"
+    },
+    {
+      "abbr": "PH",
+      "meaning": "Pixel Height - height of a PNG read from its header (_tui_md.png_size -> _PW _PH)",
+      "subsystem": "lib/markdown/tui_markdown_img.sh"
+    },
+    {
+      "abbr": "RE",
+      "meaning": "Regular Expression - a pattern held in a variable for [[ =~ ]] (_TUI_MD_RE_FENCE, _TUI_MD_RE_HR, _TUI_MD_RE_LIST)",
+      "subsystem": "lib/markdown/tui_markdown.sh"
+    },
+    {
+      "abbr": "HL",
+      "meaning": "Highlight - syntax highlighting of code blocks (_TUI_MD_HL)",
+      "subsystem": "lib/markdown/tui_markdown_hl.sh"
+    },
+    {
+      "abbr": "PADC",
+      "meaning": "Pad by Characters - text cut or padded by characters, not bytes (_tui_text.padc -> _PADC)",
+      "subsystem": "lib/widgets/tui_text.sh"
+    },
+    {
+      "abbr": "PADS",
+      "meaning": "Pad String - text cut or padded to an exact character width (_tui_cmd.pad -> _PADS)",
+      "subsystem": "lib/chrome/tui_cmd.sh"
+    },
+    {
+      "abbr": "UNESC",
+      "meaning": "Unescaped - attribute value with entities decoded (_tui_input.unesc -> _UNESC)",
+      "subsystem": "lib/input/tui_input.sh"
+    },
+    {
+      "abbr": "LB",
+      "meaning": "Layer Buttons - the header buttons of a layer from the right edge inward (_tui_layer.buttons -> _LB)",
+      "subsystem": "lib/chrome/tui_layer.sh"
+    },
+    {
+      "abbr": "SN",
+      "meaning": "Snap - row/col of a layer pulled to a screen edge (_tui_layer.snap -> _SN_ROW _SN_COL)",
+      "subsystem": "lib/chrome/tui_layer.sh"
+    },
+    {
+      "abbr": "LS",
+      "meaning": "Line Start - offset where a text widget's line begins (_tui_text.line -> _LS)",
+      "subsystem": "lib/widgets/tui_text.sh"
+    },
+    {
+      "abbr": "LE",
+      "meaning": "Line End - offset where a text widget's line ends (_tui_text.line -> _LE)",
+      "subsystem": "lib/widgets/tui_text.sh"
+    },
+    {
+      "abbr": "CTX",
+      "meaning": "Context - nearest enclosing pane and row while a page is built, for nested-widget inference (_TUI_BUILD_CTX_PANE/_ROW)",
+      "subsystem": "lib/markup/tui_build.sh"
+    },
+    {
+      "abbr": "REC",
+      "meaning": "Recorded - what the page cache recorded while building a page and replays instead of re-parsing (_TUI_CACHE_REC_*)",
+      "subsystem": "lib/markup/tui_cache.sh"
+    },
+    {
+      "abbr": "R",
+      "meaning": "Row - suffix of a row result or field (_CR_R, _AR_R, _TXG_R, _LY_R is the layout result instead)",
+      "subsystem": "lib/tui.sh"
+    },
+    {
+      "abbr": "C",
+      "meaning": "Column - suffix of a column result or field (_CR_C, _AR_C, _TXG_C)",
+      "subsystem": "lib/tui.sh"
+    },
+    {
+      "abbr": "H",
+      "meaning": "Height - suffix of a height in rows (_TUI_P_H, _TUI_L_H, _CR_H); in _MANIFEST_H it is a hash",
+      "subsystem": "lib/tui.sh"
+    },
+    {
+      "abbr": "X",
+      "meaning": "X coordinate - column of a pointer or layer position (_DLG_X, _EVENT_X, _TUI_RZ_X)",
+      "subsystem": "lib/input/tui_input.sh"
+    },
+    {
+      "abbr": "Y",
+      "meaning": "Y coordinate - row of a pointer or layer position (_DLG_Y, _EVENT_Y, _TUI_RZ_Y)",
+      "subsystem": "lib/input/tui_input.sh"
+    },
+    {
+      "abbr": "T",
+      "meaning": "Timestamp - time of the last event of a kind (_RZ_T, _WX_CLICK_T, _TUI_RZ_LAST_T)",
+      "subsystem": "lib/layout/tui_resize.sh"
+    },
+    {
+      "abbr": "F",
+      "meaning": "Findings in the validator (_TV_F_SEV/_MSG/_LOC); Flags in the layer tables (_TUI_L_F[L.flag])",
+      "subsystem": "lib/markup/tui_validate.sh, lib/chrome/tui_layer.sh"
     }
   ]
 }

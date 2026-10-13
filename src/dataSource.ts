@@ -63,8 +63,10 @@ function updateStatusItem() {
         );
     } else {
         statusItem.text = '$(archive) dabt: bundled';
+        const { sourceVersion, generatedAt } = apiIndex.meta;
+        const snapshot = sourceVersion ? `dabt ${sourceVersion}, ${generatedAt.slice(0, 10)}` : 'unknown version';
         statusItem.tooltip = new vscode.MarkdownString(
-            `DABT API/markup data from the extension's bundled snapshot - no local dabt install found.\n\nSet \`dabt.apiSource.installPath\` to point at a checkout, or click to re-check PATH.`
+            `DABT API/markup data from the extension's bundled snapshot (${snapshot}) - no local dabt install found.\n\nSet \`dabt.apiSource.installPath\` to point at a checkout, or click to re-check PATH.`
         );
     }
     statusItem.show();

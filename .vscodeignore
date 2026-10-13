@@ -11,3 +11,5 @@ node_modules/**
 docs/**
 .github/**
 .claude/**
+test/**
+release-notes/**

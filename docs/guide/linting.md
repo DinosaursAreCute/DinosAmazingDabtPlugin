@@ -48,6 +48,14 @@ tui.tick.add my_tick        # ✓
 
 These rules check one line at a time and don't parse bash. They're tuned to rarely fire on correct code, but aren't guaranteed to catch every case.
 
+## Fork-free callbacks
+
+In `*_callbacks.sh` and `*.plugin.sh` files, an external command that bash can replace gets an Information hint: `basename` and `dirname` become `${p##*/}` and `${p%/*}`, `date` becomes `printf -v VAR '%(%F %T)T' -1`, `sed`, `awk`, `cut` and `tr` become parameter expansion or `[[ =~ ]]`, `$(echo ...)` becomes a direct assignment. Callbacks run on input and refresh paths, where each fork costs about a millisecond. The hint is advice: outside those paths a fork is fine, so add a `dabt-ignore` comment to the line or switch `dabt.lint.performance` off.
+
+## Comments and strings
+
+Rules do not fire on text inside comments or single quotes, so `# echo -e` and `'cat x | y'` stay quiet. A line containing `dabt-ignore` is skipped entirely.
+
 ## Turning linting off
 
 | Setting | Effect |

@@ -2,7 +2,9 @@
 
 DABT pages are plain `.xml` files with a `<tui>` root (see the framework's [markup guide](https://dinosaursarecute.github.io/DinosAmazingBashTui/guide/markup)). DABT Tools recognizes a page **by its content**, not its name. Any XML document containing `<tui`, `<pane`, or a `noNamespaceSchemaLocation` pointing at `tui.xsd` gets the features below. Other XML files in your workspace are left alone.
 
-All element and attribute knowledge comes from `share/tui.xsd` in the active [data source](data-source.md): 19 elements and 191 attributes as of DABT 0.0.16. When DABT adds an attribute, it shows up here with no extension update.
+All element and attribute knowledge comes from `share/tui.xsd` in the active [data source](data-source.md). The bundled fallback currently targets DABT 0.0.24-preRelease: 54 elements and 1,311 effective attributes, including attributes and child elements declared through shared XSD groups. Its markup includes layout aliases, floating layers, reusable templates and components, loops, conditions, addons, grid/fixed splits and tabs. With a live data source, schema changes appear without an extension update.
+
+For markup behavior and examples, see the framework's [markup reference](https://dinosaursarecute.github.io/DinosAmazingBashTui/guide/markup) and [grid layouts and tabs](https://dinosaursarecute.github.io/DinosAmazingBashTui/guide/grid-layouts-and-tabs).
 
 ![A pane tag with a required-attribute marker, a class color swatch and fg/bg inlay hints](../assets/img/xml_example.png)
 
@@ -37,6 +39,14 @@ Paths resolve relative to the page's own folder, the same way DABT resolves them
 ## Required-attribute markers
 
 Every **required** attribute you've written gets a small red `*` after its name. You can see which attributes a tag can't do without, without hovering. The markers update as you type.
+
+## Diagnostics
+
+Pages are checked as you type against the schema and the files they point at: unknown elements and attributes, missing required attributes, callbacks with no function behind them, missing `src`/`page` files, duplicate ids and theme classes the theme does not define. On open and save the framework's own validator also runs (needs a DABT install) and its findings, layout rules included, show with source `dabt validate`. All codes are in the [lint rules reference](../reference/lint-rules.md#markup-rules).
+
+## Outline and callback lenses
+
+The Outline view and breadcrumbs list a page's panes and widgets by `id`, nested the way they are written. In a `*_callbacks.sh` file the Outline lists functions, tagged `callback` or `helper` (leading `_`), and a CodeLens above each callback shows how many markup attributes name it. Click it to jump to the uses. A callback with no markup use and no call in the script is a candidate for deletion.
 
 ## New Page
 
