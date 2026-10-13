@@ -4,6 +4,7 @@
 // headers as images, "What is new" / "What changed" / "Fixed") follows the DABT release notes.
 const fs = require('fs');
 const path = require('path');
+const headers = require('./gen-headers');
 
 const root = path.join(__dirname, '..');
 const args = process.argv.slice(2);
@@ -33,19 +34,33 @@ for (const m of section.split(/^### /m).slice(1)) {
     parts[title.trim()] = body.join('\n').trim();
 }
 
-const HEADERS = 'https://raw.githubusercontent.com/DinosaursAreCute/DinosAmazingBashTui/main/assets/headers';
+const HEADERS = 'https://raw.githubusercontent.com/DinosaursAreCute/DinosAmazingDabtPlugin/main/assets/headers';
 const LOGO = 'https://raw.githubusercontent.com/DinosaursAreCute/DinosAmazingDabtPlugin/main/assets/logo.png';
+// CHANGELOG heading -> header image name and its alt text, in the order they are written.
 const THEME = [
     ['Added', 'release-new', 'What is new'],
     ['Changed', 'release-what-changed', 'What changed'],
     ['Fixed', 'release-fixed', 'Fixed'],
+    ['Deprecated', 'release-deprecated', 'Deprecated'],
+    ['Removed', 'release-removed', 'Removed'],
+    ['Security', 'release-security', 'Security'],
 ];
+
+for (const [name, text] of Object.entries(headers.NAMED)) {
+    const file = path.join(root, 'assets', 'headers', `${name}.svg`);
+    if (!fs.existsSync(file)) headers.write(text, file, 7);
+}
+const titleFile = headers.versionFile(version);
+if (!fs.existsSync(titleFile)) headers.write(version, titleFile, 7);
+
 const block = (file, label) =>
     `<h2><img src="${HEADERS}/${file}.svg" alt="${label}" height="35"></h2>\n`;
 
 const out = [];
 out.push(`<div align="center">\n<img src="${LOGO}" alt="DABT Tools" width="160">\n`);
-out.push(`<h1>DABT Tools ${version}</h1>\n`);
+out.push(
+    `<h1><img src="${HEADERS}/${path.basename(titleFile)}" alt="DABT Tools ${version}" height="60"></h1>\n`
+);
 if (option('--tagline')) out.push(`<h3><em>${option('--tagline')}</em></h3>\n`);
 out.push(`${date ? `<sub>${date}</sub>\n` : ''}</div>\n`);
 if (option('--intro')) out.push(`${option('--intro')}\n`);

@@ -13,3 +13,4 @@ docs/**
 .claude/**
 test/**
 release-notes/**
+assets/headers/**

@@ -16,24 +16,24 @@ run_tests=1
 do_install=1
 while (($#)); do
 	case "$1" in
-	--editor)
-		[[ $# -ge 2 ]] || {
-			echo "install.sh: --editor needs a value" >&2
+		--editor)
+			[[ $# -ge 2 ]] || {
+				echo "install.sh: --editor needs a value" >&2
+				exit 2
+			}
+			editor="$2"
+			shift
+			;;
+		--skip-tests) run_tests=0 ;;
+		--no-install) do_install=0 ;;
+		-h | --help)
+			sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'
+			exit 0
+			;;
+		*)
+			echo "install.sh: unknown option '$1' (try --help)" >&2
 			exit 2
-		}
-		editor="$2"
-		shift
-		;;
-	--skip-tests) run_tests=0 ;;
-	--no-install) do_install=0 ;;
-	-h | --help)
-		sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'
-		exit 0
-		;;
-	*)
-		echo "install.sh: unknown option '$1' (try --help)" >&2
-		exit 2
-		;;
+			;;
 	esac
 	shift
 done

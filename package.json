@@ -227,6 +227,7 @@
     "gen-data": "node scripts/gen-data.js",
     "gen-abbrev-candidates": "node scripts/gen-abbrev-candidates.js",
     "release-notes": "node scripts/gen-release-notes.js",
+    "gen-headers": "node scripts/gen-headers.js --all",
     "vscode:prepublish": "npm run package",
     "vsix": "vsce package --no-rewrite-relative-links"
   },

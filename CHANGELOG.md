@@ -15,6 +15,7 @@ All notable changes to the DABT Tools extension are documented in this file.
 - A line containing `dabt-ignore` is skipped by every shell rule.
 - Unit tests (`npm test`, node's test runner, no editor host) and `npm run typecheck`.
 - `scripts/gen-release-notes.js`: renders themed release notes from a CHANGELOG section into `release-notes/`.
+- `scripts/gen-headers.js` / `npm run gen-headers`: block-font header images (`assets/headers/`) in the extension's colours, the same font and look as the DABT framework's `tools/gen_header.sh`; the release notes use them for the title and section headers.
 - Abbreviation glossary grew from 65 to 132 entries: module prefixes (`MD`, `TV`, `HZ`, `RZ`, `RC`, `WT`, `TJ`, ...), result-variable suffixes (`R`, `C`, `H`, `X`, `Y`) and the dapk and markdown scratch names, each tied to the file that owns it.
 - Abbreviation glossary: hovering an internal (`_`-prefixed) identifier like `_DLG_KIND` or `_TXLK` now explains its abbreviation segments (`src/data/dabtAbbreviations.json`), gated by `dabt.abbreviations.enable`.
 - `scripts/gen-abbrev-candidates.js` / `npm run gen-abbrev-candidates`: scans a DABT checkout for undocumented abbreviation segments to keep the glossary current.
